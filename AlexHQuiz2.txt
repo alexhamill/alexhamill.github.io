@@ -1,0 +1,63 @@
+Last login: Thu Sep  5 08:45:25 on ttys000
+1005948@1005948-student-FVFHW0WCQ6L3 ~ % date
+Fri Sep  6 08:07:55 EDT 2024
+1005948@1005948-student-FVFHW0WCQ6L3 ~ % cd Desktop   
+1005948@1005948-student-FVFHW0WCQ6L3 Desktop % mkdir quiz
+1005948@1005948-student-FVFHW0WCQ6L3 Desktop % cd quiz 
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % pwd
+/Users/1005948/Desktop/quiz
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % echo > moveme.txt
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls
+moveme.txt
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % echo > copyme.txt
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % mv moveme.txt move_me.txt
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % mv copyme.txt copy_me.txt               
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls
+copy_me.txt	move_me.txt
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % mkdir destination
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % mv move_me.txt destination 
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls
+'copy_me.txt	destination
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls
+copy_me.txt	destination
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % cp copy_me.txt destination 
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls
+copy_me.txt	destination
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls destination 
+copy_me.txt	move_me.txt
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % rm copy_me.txt 
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % ls
+destination
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % date
+Fri Sep  6 08:11:18 EDT 2024
+1005948@1005948-student-FVFHW0WCQ6L3 quiz % 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
