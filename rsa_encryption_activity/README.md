@@ -24,7 +24,7 @@ able to read anything
 
 ## dont share your key
 
-if you share your public key people can decrypt the message that are being sent
-throughout all of the internet just as if they were unprotected and they can
-read eveything you are doing online
+if you share your public key people can decrypt the messages that you are sending
+throughout all of the internet just as if they were being shouted in a room and they can
+read eveything you are doing online.
 
