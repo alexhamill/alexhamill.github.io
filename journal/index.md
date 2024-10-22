@@ -3,4 +3,4 @@
 
 [tables](entries/tabled.md)
 
-[LaTex](entries/latexx.md)
+[LaTex](entries/latex.md)
