@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "index.md"
+
 ---
 
 # ideal gas equation
