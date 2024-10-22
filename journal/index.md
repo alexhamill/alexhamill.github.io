@@ -1,7 +1,4 @@
----
-layout: default
-title: "index.md"
----
+
 
 [rsa activity](entries/RSA.md)
 

@@ -1,6 +1,5 @@
 ---
 layout: default
-
 ---
 
 # ideal gas equation
