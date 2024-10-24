@@ -18,13 +18,9 @@ $n=\frac{PV}{RT}$
 |var|other var|equation|
 |---|---|---|
 |p| is inversely proportional to V| $P_1V_1=P_2V_2$|
-
 |p| is directly proportional to T| $\frac{P_{1} }{T_{1}}=\frac{P_{2}  }{T_{2}}$|
-
 |p| is directly proportional to n| $\frac{P_{1} }{T_{1}}=\frac{P_{2} }{T_{2}}$|
-
 |v| is directly proportional to n| $\frac{ V_{1}}{n_{1}}=\frac{ V_{2}}{n_{2}}$|
-
 |v| is directly proportional to T|  $\frac{ V_{1}}{T_{1}}=\frac{ V_{2}}{T_{2}}$|
 
 ![picture of equations](chem.png)
