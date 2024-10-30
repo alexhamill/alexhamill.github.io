@@ -6,7 +6,7 @@
 
   while I was making this website with wordpress I definitely found some of the limitations of wordpress. Firstly I really wanted to add a    video to the background of something but i couldn't do that with the plan that I had. I also wanted to change the text color of some of my websites but you had to pay for that. I did find that making the website was overall more helpful if you didn't know how to use html to code but it was still quite a struggle to figure out how the website worked with a lot of trial and error.
 
-
+# link to my website:[Rosslyn Bakery](https://rosslynbakery.wordpress.com/)
 
 
 
