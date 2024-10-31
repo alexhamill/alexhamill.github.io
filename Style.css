@@ -115,5 +115,9 @@
       background-color: #333;
       z-index: -10;
     }
-
+.doctype-warning{
+      text-align: center;
+      background-color: antiquewhite;
+      color: red;
+}
 
