@@ -10,7 +10,9 @@
   animation:bouncy 5s infinite linear;
   position:relative;
   }
-
+.title{
+  text-align: center;
+}
 @keyframes bouncy {
   0%{top:0em}
   40%{top:0em}
