@@ -1,6 +1,9 @@
 strong:hover{
     color: red;
 }
+p:hover{
+    color: red;
+}
 body{
     text-align: center;
     align-items: center;
