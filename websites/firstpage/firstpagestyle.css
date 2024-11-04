@@ -18,6 +18,6 @@ hr{
 .box2{
     background-color: rgb(28, 127, 133);
 }
-.box :hover{
+.box:hover{
     background-color: wheat;
 }
