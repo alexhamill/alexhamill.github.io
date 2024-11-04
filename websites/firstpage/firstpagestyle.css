@@ -10,7 +10,7 @@ hr{
 .box{
     height: 25px;
     width: 25px;
-    transition: background-color 1s ease;
+    transition: 1s ease;
 }
 .box1{
     background-color: rgb(81, 183, 119);
@@ -19,5 +19,5 @@ hr{
     background-color: rgb(28, 127, 133);
 }
 .box:hover{
-    background-color: wheat;
+    background-color: rgb(255, 166, 0);
 }
