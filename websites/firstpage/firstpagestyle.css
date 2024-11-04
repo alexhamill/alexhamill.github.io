@@ -3,7 +3,10 @@ body{
     align-items: center;
     background-color: rgb(71, 93, 128);
 }
-
+hr{
+    color: red;
+    background-color: red;
+}
 .box{
     height: 25px;
     width: 25px;
