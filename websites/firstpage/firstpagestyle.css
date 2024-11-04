@@ -1,0 +1,10 @@
+body{
+    text-align: center;
+    align-items: center;
+}
+
+.box{
+    size: 25px;
+    background-color: blueviolet;
+}
+
