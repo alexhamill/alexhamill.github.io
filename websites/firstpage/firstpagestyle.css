@@ -8,8 +8,8 @@ hr{
     background-color: red;
 }
 .box{
-    height: 100px;
-    width: 100px;
+    height: 10%;
+    width: 10%;
     transition: .3s ease;
 }
 .box1{
