@@ -31,7 +31,7 @@ hr{
 .box:hover{
     background-color: rgb(255, 166, 0);
 }
-.box:active{
+.box.active{
     background-blend-mode: color-burn;
     background-color: blue;
 }
