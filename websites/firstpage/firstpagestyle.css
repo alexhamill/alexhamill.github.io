@@ -28,6 +28,10 @@ hr{
 .box2{
     background-color: rgb(28, 127, 133);
 }
-.box:active{
+.box:hover{
     background-color: rgb(255, 166, 0);
+}
+.box:active{
+    background-blend-mode: color-burn;
+    background-color: blue;
 }
