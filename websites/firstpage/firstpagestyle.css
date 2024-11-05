@@ -9,6 +9,10 @@ body{
     align-items: center;
     background-color: rgb(71, 93, 128);
 }
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
 hr{
     color: red;
     background-color: red;
