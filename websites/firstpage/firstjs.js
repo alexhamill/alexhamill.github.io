@@ -1,11 +1,16 @@
-function changecolor(event){
-  event.currentTarget.classList.toggle('active');}
 
-function listiners(){
-  var boxes = document.querySelectorAll('.box');
-  boxes.forEach(function(box) {
-    boxes.addEventListener('click', changecolor)
-  });
-
+function changecolor(event) {
+  var box = event.currentTarget;
+  box.classList.toggle('active'); 
 }
-listiners();
+
+
+function Listeners() {
+  var boxes = document.querySelectorAll('.box'); 
+  boxes.forEach(function(box) {
+    box.addEventListener('click', changecolor);
+  });
+}
+
+Listeners();
+
