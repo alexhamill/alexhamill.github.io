@@ -39,7 +39,7 @@ hr{
 }
 
 @keyframes colors {
-    from{background-color: red;height: 50px;}
-    to{background-color: blue;height: 100px;}
-
+    0%{background-color: red;height: 50px;}
+    50%{background-color: blue;height: 100px;}
+    100%{background-color: red;height: 50px;}
 }
