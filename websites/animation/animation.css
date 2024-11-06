@@ -1,0 +1,13 @@
+cube{
+    height: 50px;
+    width: 50px;
+    animation: rotat 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotat {
+    0%{left: 0%; background-color: red;}
+    25%{left: 100%; background-color: blue;}
+    75%{top: 100%;left: 100%; background-color: yellow;}
+    100%{top: 100%;left: 0%; background-color: green;}
+}
