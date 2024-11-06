@@ -18,6 +18,7 @@ hr{
     background-color: red;
 }
 .box{
+    animation:bouncy 5s colors linear;
     height: 50px;
     width: 50px;
     transition: .3s ease;
@@ -34,4 +35,9 @@ hr{
 .box.active{
     background-blend-mode: color-burn;
     background-color: rgb(145, 145, 232);
+}
+
+@keyframes colors {
+    from{background-color: red;}
+    to{background-color: blue;}
 }
