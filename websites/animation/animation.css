@@ -3,6 +3,7 @@ cube{
     width: 50px;
     animation: rotat 5s;
     animation-iteration-count: infinite;
+    background-color: black;
 }
 
 @keyframes rotat {
