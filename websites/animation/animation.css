@@ -14,7 +14,7 @@
     animation: rotat2 5s;
     animation-iteration-count: infinite;
     background-color: red;
-    animation-delay:0.07s
+    animation-delay:0.07s;
 }
 
 @keyframes rotat {
