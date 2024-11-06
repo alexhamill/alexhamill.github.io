@@ -18,7 +18,7 @@ hr{
     background-color: red;
 }
 .box{
-    animation:bouncy 5s colors linear;
+    animation:colors 5s;
     height: 50px;
     width: 50px;
     transition: .3s ease;
