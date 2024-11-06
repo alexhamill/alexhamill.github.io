@@ -19,6 +19,7 @@ hr{
 }
 .box{
     animation:colors 5s;
+    animation-iteration-count: infinite;
     height: 50px;
     width: 50px;
     transition: .3s ease;
