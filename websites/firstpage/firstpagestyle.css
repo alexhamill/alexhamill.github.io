@@ -38,6 +38,7 @@ hr{
 }
 
 @keyframes colors {
-    from{background-color: red;}
-    to{background-color: blue;}
+    from{background-color: red;height: 50px;}
+    to{background-color: blue;height: 100px;}
+
 }
