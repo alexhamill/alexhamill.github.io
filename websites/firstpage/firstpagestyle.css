@@ -36,8 +36,14 @@ hr{
 .box.active{
     background-blend-mode: color-burn;
     background-color: rgb(145, 145, 232);
+    animation:col2 5s;
+    animation-iteration-count: infinite;
 }
-
+@keyframes col2 {
+    0%{background-color: yellow;height: 50px;}
+    50%{background-color: green;height: 100px;}
+    100%{background-color: yellow;height: 50px;}
+}
 @keyframes colors {
     0%{background-color: red;height: 50px;}
     50%{background-color: blue;height: 100px;}
