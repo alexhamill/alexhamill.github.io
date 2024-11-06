@@ -1,4 +1,5 @@
 .cube{
+    position: fixed;
     height: 50px;
     width: 50px;
     animation: rotat 5s;
