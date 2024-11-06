@@ -21,10 +21,10 @@
     position: fixed;
     height: 50px;
     width: 50px;
-    animation: rotat2 5s;
+    animation: rotat3 5s;
     animation-iteration-count: infinite;
     background-color: red;
-    animation-delay:0.1s
+    animation-delay:0.2s
 }
 
 @keyframes rotat {
