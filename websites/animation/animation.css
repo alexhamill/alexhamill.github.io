@@ -1,7 +1,8 @@
-cube{
+.cube{
     height: 50px;
     width: 50px;
-    
+    animation: rotat 5s;
+    animation-iteration-count: infinite;
     background-color: black;
 }
 
