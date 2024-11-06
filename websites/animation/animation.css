@@ -4,7 +4,17 @@
     width: 50px;
     animation: rotat 5s;
     animation-iteration-count: infinite;
-    background-color: black;
+    background-color: red;
+}
+.cube2{
+
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    animation: rotat2 5s;
+    animation-iteration-count: infinite;
+    background-color: red;
+    animation-delay:0.07s
 }
 
 @keyframes rotat {
@@ -13,6 +23,13 @@
     50%{top: calc(100% - 50px);left: calc(100% - 50px); background-color: rgb(0, 213, 255);}
     75%{top: calc(100% - 50px);left: 0%; background-color: rgb(86, 169, 18);}
     100%{top: 0%;left: 0%; background-color: red;}
+}
+@keyframes rotat2 {
+    0%{left: calc(0%+50px);top: calc(0%+50px); background-color: red;}
+    25%{left: calc(100% - 50px);top:calc(0%+50px); background-color: blue;}
+    50%{top: calc(100% - 50px);left: calc(100% - 50px); background-color: rgb(0, 213, 255);}
+    75%{top: calc(100% - 50px);left: calc(0%+50px); background-color: rgb(86, 169, 18);}
+    100%{top: calc(0%+50px);left: calc(0%+50px); background-color: red;}
 }
 
 body{
