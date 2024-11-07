@@ -3,7 +3,7 @@ function move(event) {
     const ranx = Math.floor(Math.random()*(window.innerWidth-50));
     const rany = Math.floor(Math.random()*(window.innerHeight-50));
     cube.style.transform = `translate(${ranx}px, ${rany}px`
-    cube.classList.append('active'); 
+    cube.classList.append('.active'); 
 
   }
 
