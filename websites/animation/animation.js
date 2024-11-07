@@ -11,7 +11,7 @@ function move(event) {
   function Listeners() {
     var cubes = document.querySelectorAll('.cube'); 
     cubes.forEach(function(cube) {
-      cubes.addEventListener('click', move);
+      cube.addEventListener('mouseenter', move);
     });
   }
   
