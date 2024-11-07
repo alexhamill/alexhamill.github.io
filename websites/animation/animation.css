@@ -4,6 +4,7 @@
     width: 50px;
     animation-iteration-count: infinite;
     background-color: red;
+    transition: 2s ease;
 }
 .cube1{
     animation: rotat 5s;
