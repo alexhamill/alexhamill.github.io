@@ -50,10 +50,7 @@
 }
 .cube.active{
     animation: colors 5s infinite;
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -o-transition: none !important;
-    transition: none !important;
+    
 }
 body{
     background-color: black;
