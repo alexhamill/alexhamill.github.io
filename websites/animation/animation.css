@@ -36,11 +36,15 @@
     75%{top: calc(100% - 150px);left: 100px; background-color: rgb(86, 169, 18);}
     100%{top: 100px;left: 100px; background-color: red;}
 }
-
+@keyframes pulse {
+    0%, 100%{transform: scale(1);}
+    50%{transform: scale(1.1);}
+}
 body{
     background-color: black;
 }
 
 .stop:hover {
     animation-play-state: paused;
+    animation: pulse 0.5s infinite;
   }
