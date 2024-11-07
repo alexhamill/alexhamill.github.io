@@ -2,29 +2,17 @@
     position: fixed;
     height: 50px;
     width: 50px;
-    animation: rotat 5s;
     animation-iteration-count: infinite;
     background-color: red;
+}
+.cube1{
+    animation: rotat 5s;
 }
 .cube2{
-
-    position: fixed;
-    height: 50px;
-    width: 50px;
     animation: rotat2 5s;
-    animation-iteration-count: infinite;
-    background-color: red;
-    animation-delay:0.1s
 }
 .cube3{
-
-    position: fixed;
-    height: 50px;
-    width: 50px;
     animation: rotat3 5s;
-    animation-iteration-count: infinite;
-    background-color: red;
-    animation-delay:0.2s
 }
 
 @keyframes rotat {
