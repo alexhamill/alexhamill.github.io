@@ -6,13 +6,13 @@
     background-color: red;
 }
 .cube1{
-    animation: rotat 5s infinite;
+    animation: rotat 5s;
 }
 .cube2{
-    animation: rotat2 5s infinite;
+    animation: rotat2 5s;
 }
 .cube3{
-    animation: rotat3 5s infinite;
+    animation: rotat3 5s;
 }
 
 @keyframes rotat {
