@@ -44,7 +44,7 @@
 @keyframes rotat3 {
     0%{left: 100px;top: 100px; background-color: red;}
     25%{left: calc(100% - 150px);top: 100px; background-color: blue;}
-    50%{top: calc(100% - 150px);left: calc(100% - 150px); background-color: rgb(0, 213, 255);}
+    50%{top: calc(100% - 150px);left: calc(100% - 150px); background-color: rgb(255, 0, 115);}
     75%{top: calc(100% - 150px);left: 100px; background-color: rgb(86, 169, 18);}
     100%{top: 100px;left: 100px; background-color: red;}
 }
