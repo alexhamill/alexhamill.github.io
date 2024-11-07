@@ -7,13 +7,13 @@
     transition: 2s ease;
 }
 .cube1{
-    animation: rotat 5s;
+    animation: rotat 5s infinite;
 }
 .cube2{
-    animation: rotat2 5s;
+    animation: rotat2 5s infinite;
 }
 .cube3{
-    animation: rotat3 5s;
+    animation: rotat3 5s infinite;
 }
 
 @keyframes rotat {
@@ -40,6 +40,16 @@
 @keyframes pulse {
     0%, 100%{transform: scale(1);}
     50%{transform: scale(1.1);}
+}
+@keyframes colors {
+    0%{background-color: red;}
+    25%{background-color: blue;}
+    50%{background-color: rgb(0, 213, 255);}
+    75%{background-color: rgb(86, 169, 18);}
+    100%{background-color: red;}
+}
+.cube.active{
+    animation: colors 5s infinite;
 }
 body{
     background-color: black;
