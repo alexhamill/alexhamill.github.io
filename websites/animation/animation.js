@@ -30,6 +30,8 @@ function move(event) {
     document.querySelector(".code").textContent=exp();
   }
   function decode(code){
+    var code = document.getElementById(code).value;
+    console.log(code);
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
