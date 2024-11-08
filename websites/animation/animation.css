@@ -58,3 +58,7 @@ body{
 /* html {
     cursor: url('favicon.ico'), default;
   } */
+.score{
+    color: chartreuse;
+    background-color: aqua;
+}
