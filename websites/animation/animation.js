@@ -17,5 +17,16 @@ function move(event) {
       cube.addEventListener('mouseenter', move);
     });
   }
+  function exp(){
+    const c1 = document.querySelector(".cube1");
+    const c2 = document.querySelector(".cube2");
+    const c3 = document.querySelector(".cube3");
+    var code = score + "$" + c1.offsetLeft; + "$" + c1.offsetTop;
+    return code;
+  }
+  function getcode(){
+    document.querySelector(".code").textContent=exp();
+  }
   
   Listeners();
+  getcode();
