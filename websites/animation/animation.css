@@ -61,4 +61,7 @@ body{
 .score{
     color: chartreuse;
     background-color: aqua;
+    position: absolute;
+    left: 0%;
+    top: 50%;  
 }
