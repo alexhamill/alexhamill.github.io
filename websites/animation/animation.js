@@ -22,7 +22,7 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
-    var code = score + "$" + c1.offsetLeft; + "$" + c1.offsetTop + "$" + c2.offsetLeft + "$" + c2.offsetTop + c3.offsetLeft; + "$" + c3.offsetTop + "x";
+    var code = score + "$" + c1.offsetLeft + "$" + c1.offsetTop + "$" + c2.offsetLeft + "$" + c2.offsetTop + c3.offsetLeft; + "$" + c3.offsetTop + "x";
     return code;
   }
   function getcode(){
