@@ -41,9 +41,14 @@ function move(event) {
     document.querySelector('.score').textContent = score;
     console.log(bindexOf(code,"$",6));
     c1.style.left = Number(code.substr(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)-1)) + 'px';
-    
+    console.log("1:"+code.substr(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)-1) + 'px');
+    console.log(bindexOf(code,"$",1));
+    console.log(bindexOf(code,"$",2));
+
     c1.style.top =  Number(code.substr(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1)) + 'px';
     console.log("2:"+code.substr(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1) + 'px');
+    console.log(bindexOf(code,"$",2));
+    console.log(bindexOf(code,"$",3));
 
     c2.style.left =  Number(code.substr(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1)) + 'px';
     console.log("3:"+code.substr(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1) + 'px');
