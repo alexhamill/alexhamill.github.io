@@ -37,23 +37,24 @@ function move(event) {
     const c3 = document.querySelector(".cube3");
     var score = Number(Number(code.substr(code.indexOf("s")+1,code.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
-    c1.style.left = code.substr(code.indexOf("$",1)+1,code.indexOf("$",2)-1) + 'px';
-    console.log(code.indexOf("$",2));
-    console.log(code.indexOf("$",4));
-    console.log(code.indexOf("$",6));
-    console.log(code.indexOf("$",8));
-    console.log(code.indexOf("$",10));
-    console.log(code.indexOf("$",12));
-    c1.style.top =  code.substr(code.indexOf("$",2)+1,code.indexOf("$",3)-1) + 'px';
-    c2.style.left =  code.substr(code.indexOf("$",3)+1,code.indexOf("$",4)-1) + 'px';
-    c2.style.top =  code.substr(code.indexOf("$",4)+1,code.indexOf("$",5)-1) + 'px';
-    c3.style.left =  code.substr(code.indexOf("$",5)+1,code.indexOf("$",6)-1) + 'px';
-    c3.style.top =  code.substr(code.indexOf("$",6)+1,code.indexOf("x")-1) + 'px';
+    console.log(bindexOf(code,"$",4));
+    c1.style.left = code.substr(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)-1) + 'px';
+    c1.style.top =  code.substr(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1) + 'px';
+    c2.style.left =  code.substr(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1) + 'px';
+    c2.style.top =  code.substr(bindexOf(code,"$",4)+1,bindexOf(code,"$",5)-1) + 'px';
+    c3.style.left =  code.substr(bindexOf(code,"$",5)+1,bindexOf(code,"$",6)-1) + 'px';
+    c3.style.top =  code.substr(bindexOf(code,"$",6)+1,code.indexOf("x")-1) + 'px';
   }
 
   function opensetings(event) {
     var cube = document.querySelector(".settings");
     cube.classList.toggle('active');
+  }
+  function bindexOf(str,s,n){
+    var curentpos = 0;
+    for (let i=0; i<n;i++){
+      curentpos = str.indexOf(s,curentpos+1);
+    }
   }
   
   function Listenerss() {
