@@ -51,7 +51,7 @@ function move(event) {
   }
   
   function Listenerss() {
-    var cubes = document.querySelectorAll('.settings'); 
+    var cubes = document.getElementById("sb"); 
     cubes.forEach(function(cube) {
       cube.addEventListener('click', opensetings);
     });}
