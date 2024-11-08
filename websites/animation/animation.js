@@ -43,7 +43,7 @@ function move(event) {
     console.log(bindexOf(code,"$",1));
     console.log(bindexOf(code,"$",2));
     c1.style.left = Number(code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) + 'px';
-    console.log("1:"+code.substringing(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)) + 'px');
+    console.log("1:"+code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)) + 'px');
     console.log(bindexOf(code,"$",1));
     console.log(bindexOf(code,"$",2));
 
