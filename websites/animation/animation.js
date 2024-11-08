@@ -35,12 +35,12 @@ function move(event) {
     const c3 = document.querySelector(".cube3");
     var score = Number(Number(str.substr(str.indexOf("s")+1,str.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
-    c1.style.left = code.substr(code.indexOf($,1)+1,code.indexOf($,2)-1) + 'px';
-    c1.style.top =  code.substr(code.indexOf($,2)+1,code.indexOf($,3)-1) + 'px';
-    c2.style.left =  code.substr(code.indexOf($,3)+1,code.indexOf($,4)-1) + 'px';
-    c2.style.top =  code.substr(code.indexOf($,4)+1,code.indexOf($,5)-1) + 'px';
-    c3.style.left =  code.substr(code.indexOf($,5)+1,code.indexOf($,6)-1) + 'px';
-    c3.style.top =  code.substr(code.indexOf($,6)+1,code.indexOf(x)-1) + 'px';
+    c1.style.left = code.substr(code.indexOf("$",1)+1,code.indexOf("$",2)-1) + 'px';
+    c1.style.top =  code.substr(code.indexOf("$",2)+1,code.indexOf("$",3)-1) + 'px';
+    c2.style.left =  code.substr(code.indexOf("$",3)+1,code.indexOf("$",4)-1) + 'px';
+    c2.style.top =  code.substr(code.indexOf("$",4)+1,code.indexOf("$",5)-1) + 'px';
+    c3.style.left =  code.substr(code.indexOf("$",5)+1,code.indexOf("$",6)-1) + 'px';
+    c3.style.top =  code.substr(code.indexOf("$",6)+1,code.indexOf("x")-1) + 'px';
   }
   getcode();
   Listeners();
