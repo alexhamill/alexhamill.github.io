@@ -40,8 +40,10 @@ function move(event) {
     var score = Number(Number(code.substr(code.indexOf("s")+1,code.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
     console.log(bindexOf(code,"$",6));
+    console.log(bindexOf(code,"$",1));
+    console.log(bindexOf(code,"$",2));
     c1.style.left = Number(code.substr(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) + 'px';
-    console.log("1:"+code.substr(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)-1) + 'px');
+    console.log("1:"+code.substr(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)) + 'px');
     console.log(bindexOf(code,"$",1));
     console.log(bindexOf(code,"$",2));
 
