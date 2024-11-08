@@ -35,7 +35,7 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
-    var score = Number(Number(code.substr(str.indexOf("s")+1,code.indexOf("$")-1)));
+    var score = Number(Number(code.substr(code.indexOf("s")+1,code.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
     c1.style.left = code.substr(code.indexOf("$",1)+1,code.indexOf("$",2)-1) + 'px';
     c1.style.top =  code.substr(code.indexOf("$",2)+1,code.indexOf("$",3)-1) + 'px';
@@ -46,15 +46,14 @@ function move(event) {
   }
 
   function opensetings(event) {
-    var cube = event.currentTarget;
+    var cube = document.querySelector(".settings");
     cube.classList.toggle('active');
   }
   
   function Listenerss() {
-    var cubes = document.getElementById("sb"); 
-    cubes.forEach(function(cube) {
-      cube.addEventListener('click', opensetings);
-    });}
+    var cube = document.getElementById("sb"); 
+    cube.addEventListener('click', opensetings);
+    }
   getcode();
   Listeners();
   Listenerss();
