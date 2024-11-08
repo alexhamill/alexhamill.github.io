@@ -42,6 +42,28 @@ function move(event) {
     c3.style.left =  code.substr(code.indexOf("$",5)+1,code.indexOf("$",6)-1) + 'px';
     c3.style.top =  code.substr(code.indexOf("$",6)+1,code.indexOf("x")-1) + 'px';
   }
+  function move(event) {
+    var cube = event.currentTarget;
+    const ranx = Math.floor(Math.random()*(window.innerWidth-50));
+    const rany = Math.floor(Math.random()*(window.innerHeight-50));
+    cube.style.left = ranx + 'px';
+    cube.style.top = rany + 'px';
+    cube.classList.add('active');
+    score = score + 1;
+    document.querySelector('.score').textContent = score;
+    getcode();
+  }
+
+  function opensetings(event) {
+    var cube = event.currentTarget;
+    cube.classList.toggle('active');
+  }
+  
+  function Listenerss() {
+    var cubes = document.querySelectorAll('.settings'); 
+    cubes.forEach(function(cube) {
+      cube.addEventListener('mouseenter', opensetings);
+    });
   getcode();
   Listeners();
-  
+  Listenerss();

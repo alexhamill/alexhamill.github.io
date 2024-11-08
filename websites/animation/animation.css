@@ -69,3 +69,16 @@ body{
 .code{
     color: red;
 }
+.settings{
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    transition: 2s ease;
+}
+.settings.active{
+    height: 100px;
+    width: 100px;
+}
