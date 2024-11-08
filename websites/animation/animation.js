@@ -39,30 +39,23 @@ function move(event) {
     const c3 = document.querySelector(".cube3");
     var score = Number(Number(code.substring(code.indexOf("s")+1,code.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
-    console.log(bindexOf(code,"$",6));
-    console.log(bindexOf(code,"$",1));
-    console.log(bindexOf(code,"$",2));
+    
     c1.style.left = Number(code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) + 'px';
-    console.log("1:"+code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2)) + 'px');
-    console.log(bindexOf(code,"$",1));
-    console.log(bindexOf(code,"$",2));
+    
 
     c1.style.top =  Number(code.substring(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1)) + 'px';
-    console.log("2:"+code.substring(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1) + 'px');
-    console.log(bindexOf(code,"$",2));
-    console.log(bindexOf(code,"$",3));
+   
 
     c2.style.left =  Number(code.substring(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1)) + 'px';
-    console.log("3:"+code.substring(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1) + 'px');
-
+    
     c2.style.top =  Number(code.substring(bindexOf(code,"$",4)+1,bindexOf(code,"$",5)-1)) + 'px';
-    console.log("4:"+code.substring(bindexOf(code,"$",4)+1,bindexOf(code,"$",5)-1) + 'px');
+    
 
     c3.style.left =  Number(code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6)-1)) + 'px';
-    console.log("5:"+code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6)-1) + 'px');
+    
 
     c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,code.indexOf("x")-1)) + 'px';
-    console.log("6:"+code.substring(bindexOf(code,"$",6)+1,code.indexOf("x")-1) + 'px');
+   
     
   }
 
