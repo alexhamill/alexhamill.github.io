@@ -77,8 +77,10 @@ body{
     height: 50px;
     width: 50px;
     transition: .3s ease;
+    display: none;
 }
 .settings.active{
     height: 100px;
     width: 100px;
+    display: block;
 }
