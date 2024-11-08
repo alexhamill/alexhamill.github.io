@@ -76,7 +76,7 @@ body{
     top: 50%;
     height: 50px;
     width: 50px;
-    transition: 2s ease;
+    transition: .3s ease;
 }
 .settings.active{
     height: 100px;
