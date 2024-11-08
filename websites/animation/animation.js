@@ -3,8 +3,8 @@ function move(event) {
     var cube = event.currentTarget;
     const ranx = Math.floor(Math.random()*(window.innerWidth-50));
     const rany = Math.floor(Math.random()*(window.innerHeight-50));
-    cube.style.left = ${ranx} px;
-    cube.style.top = ${rany} px;
+    cube.style.left = ranx + 'px';
+    cube.style.top = rany + 'px';
     cube.classList.add('active');
     score = score + 1;
     document.querySelector('.score').textContent = score;
