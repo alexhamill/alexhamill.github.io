@@ -55,7 +55,7 @@ function move(event) {
   }
   function bindexOf(str,s,n){
     var curentpos = 0;
-    for (let i=0; i<n;i++){
+    for (let i=0; i<n-1;i++){
       curentpos = str.indexOf(s,curentpos+1);
     }
     return curentpos;
