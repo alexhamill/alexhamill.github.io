@@ -38,12 +38,12 @@ function move(event) {
     var score = Number(Number(code.substr(code.indexOf("s")+1,code.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
     c1.style.left = code.substr(code.indexOf("$",1)+1,code.indexOf("$",2)-1) + 'px';
-    console.log(code.indexOf("$",(1*2)));
-    console.log(code.indexOf("$",(2*2)));
-    console.log(code.indexOf("$",3*2));
-    console.log(code.indexOf("$",4*2));
-    console.log(code.indexOf("$",5*2));
-    console.log(code.indexOf("$",6*2));
+    console.log(code.indexOf("$",2));
+    console.log(code.indexOf("$",4));
+    console.log(code.indexOf("$",6));
+    console.log(code.indexOf("$",8));
+    console.log(code.indexOf("$",10));
+    console.log(code.indexOf("$",12));
     c1.style.top =  code.substr(code.indexOf("$",2)+1,code.indexOf("$",3)-1) + 'px';
     c2.style.left =  code.substr(code.indexOf("$",3)+1,code.indexOf("$",4)-1) + 'px';
     c2.style.top =  code.substr(code.indexOf("$",4)+1,code.indexOf("$",5)-1) + 'px';
