@@ -1,7 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>TCP vs UDP</title>
+        <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        img{
+        width:30%;
+        height: 30%;
+        }
+        .picture{
+            text-align: center;
+        
+        }
+         </style>
+     <title>TCP vs UDP</title>
     </head>
     <body>
         <h1>TCP vs UDP</h1>
@@ -17,6 +37,9 @@
             it just sends the packets and does not wait for a acknowledgement. There is so sequencing so it just sends in any order.
             There is no error checking so if packets dont arrive or arrive damaged it cannot tell.
         </p>
+        <div class="picture">
+        <img src="image.png"></img>
+        </div>
         <h3>difrences</h3>
         <table>
             <tr>
@@ -26,14 +49,18 @@
             </tr>
                 <tr>
                 <td>Speed</td>
-                <td>FAST</td>
-                <td>SLOW</td>
+                <td>Fast</td>
+                <td>Slow</td>
             </tr>
             <tr>
                 <td>error correction</td>
-                <td>NO ERROR CORRECTION</td>
-                <td>PACKETS WILL BE DELIVERED CORECTLY</td>
+                <td>no error correction</td>
+                <td>sends acks to mack sure packets are correct</td>
             </tr>
+            <tr>
+                <td>Sequencing</td>
+                <td>no sequencing packets are send it a random order</td>
+                <td>packets are sequinced befor being sent</td>
           </table>
     </body>
 </html>
