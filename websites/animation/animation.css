@@ -59,8 +59,7 @@ body{
     cursor: url('favicon.ico'), default;
   } */
 .score{
-    color: chartreuse;
-    background-color: aqua;
+    animation: colors 5s infinite;
     position: absolute;
     left: 0%;
     top: 50%;  
