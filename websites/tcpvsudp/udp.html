@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TCP vs UDP</title>
+    </head>
+    <body>
+        <h1>TCP vs UDP</h1>
+        <hr>
+        <h3>TCP</h3>
+        <p><strong>TCP</strong> uses a conection bassed system to transfer data. First it establises a conection between the computers. 
+            then a packet is send between the computers. Then an acknowledgement it sent to make sure that all of the packet arived.
+            <strong>TCP</strong> also is able to sequence the packets so that they are able to be sent in a specific order
+        </p>
+        <h3>UDP</h3>
+        <p>
+            <strong>UDP</strong> does not make a conection with the target computer before sending the packets.
+            it just sends the packets and does not wait for a acknowledgement. There is so sequencing so it just sends in any order.
+            There is no error checking so if packets dont arrive or arrive damaged it cannot tell.
+        </p>
+        <h3>difrences</h3>
+        <table>
+            <tr>
+                <th> </th>
+                <th>UDP</th>
+                <th>TCP</th>
+            </tr>
+                <tr>
+                <td>Speed</td>
+                <td>FAST</td>
+                <td>SLOW</td>
+            </tr>
+            <tr>
+                <td>error correction</td>
+                <td>NO ERROR CORRECTION</td>
+                <td>PACKETS WILL BE DELIVERED CORECTLY</td>
+            </tr>
+          </table>
+    </body>
+</html>
