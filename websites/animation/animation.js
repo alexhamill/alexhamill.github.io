@@ -24,7 +24,7 @@ function move(event) {
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
     var code = "s" + score + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "x";
-    code.replaceAll('px',"");
+    code = code.replaceAll('px',"");
     return code;
   }
   function getcode(){
