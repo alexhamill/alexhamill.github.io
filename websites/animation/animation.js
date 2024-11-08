@@ -63,7 +63,7 @@ function move(event) {
     var cubes = document.querySelectorAll('.settings'); 
     cubes.forEach(function(cube) {
       cube.addEventListener('mouseenter', opensetings);
-    });
+    });}
   getcode();
   Listeners();
   Listenerss();
