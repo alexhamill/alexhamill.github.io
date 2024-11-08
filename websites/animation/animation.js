@@ -7,6 +7,7 @@ function move(event) {
     cube.classList.add('active');
     score = score + 1;
     document.querySelector('.score').textContent = score;
+    getcode();
   }
 
   
@@ -27,6 +28,6 @@ function move(event) {
   function getcode(){
     document.querySelector(".code").textContent=exp();
   }
-  
-  Listeners();
   getcode();
+  Listeners();
+  
