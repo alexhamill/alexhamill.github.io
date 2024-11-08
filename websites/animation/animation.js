@@ -55,6 +55,7 @@ function move(event) {
     for (let i=0; i<n;i++){
       curentpos = str.indexOf(s,curentpos+1);
     }
+    return curentpos;
   }
   
   function Listenerss() {
