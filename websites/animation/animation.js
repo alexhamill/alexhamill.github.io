@@ -44,18 +44,18 @@ function move(event) {
     c1.style.left = Number(code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) + 'px';
 
 
-    c1.style.top =  Number(code.substring(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1)) + 'px';
+    c1.style.top =  Number(code.substring(bindexOf(code,"$",2)+1,bindexOf(code,"$",3))) + 'px';
 
 
-    c2.style.left =  Number(code.substring(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1)) + 'px';
+    c2.style.left =  Number(code.substring(bindexOf(code,"$",3)+1,bindexOf(code,"$",4))) + 'px';
 
-    c2.style.top =  Number(code.substring(bindexOf(code,"$",4)+1,bindexOf(code,"$",5)-1)) + 'px';
-
-
-    c3.style.left =  Number(code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6)-1)) + 'px';
+    c2.style.top =  Number(code.substring(bindexOf(code,"$",4)+1,bindexOf(code,"$",5))) + 'px';
 
 
-    c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,code.indexOf("x")-1)) + 'px';
+    c3.style.left =  Number(code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6))) + 'px';
+
+
+    c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,code.indexOf("x"))) + 'px';
    
     
   }
