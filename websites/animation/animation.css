@@ -95,6 +95,8 @@ body{
 #sb{
     font-size: 30px;
     cursor: pointer;
-    color: red;
-    /* animation: textcolors 5s infinite; */
+    left: 95%;
+    top: 0%;
+    position: absolute;
+    animation: textcolors 5s infinite;
 }
