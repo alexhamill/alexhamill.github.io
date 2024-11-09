@@ -90,8 +90,7 @@ body{
     display: none;
 }
 .settings.active{
-    height: 100px;
-    width: 100px;
+    
     display: flex;
 }
 #sb{
