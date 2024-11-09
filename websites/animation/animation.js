@@ -24,7 +24,7 @@ function move(event) {
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
     var code = "s" + score + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "y";
-    
+    code = code.replaceAll('px',"");
     return code;
   }
   function getcode(){
@@ -41,21 +41,21 @@ function move(event) {
     var score = Number(Number(code.substring(code.indexOf("s")+1,code.indexOf("$")-1)));
     document.querySelector('.score').textContent = score;
     
-    c1.style.left = Number(code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) ;
-    
+    c1.style.left = Number(code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) + 'px';
 
-    c1.style.top =  Number(code.substring(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1)) ;
-   
 
-    c2.style.left =  Number(code.substring(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1)) ;
-    
-    c2.style.top =  Number(code.substring(bindexOf(code,"$",4)+1,bindexOf(code,"$",5)-1)) ;
-    
+    c1.style.top =  Number(code.substring(bindexOf(code,"$",2)+1,bindexOf(code,"$",3)-1)) + 'px';
 
-    c3.style.left =  Number(code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6)-1)) ;
-    
 
-    c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,code.indexOf("y")-1)) ;
+    c2.style.left =  Number(code.substring(bindexOf(code,"$",3)+1,bindexOf(code,"$",4)-1)) + 'px';
+
+    c2.style.top =  Number(code.substring(bindexOf(code,"$",4)+1,bindexOf(code,"$",5)-1)) + 'px';
+
+
+    c3.style.left =  Number(code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6)-1)) + 'px';
+
+
+    c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,code.indexOf("x")-1)) + 'px';
    
     
   }
