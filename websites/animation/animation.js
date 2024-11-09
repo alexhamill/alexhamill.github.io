@@ -6,7 +6,7 @@ function move(event) {
     cube.style.left = ranx + 'px';
     cube.style.top = rany + 'px';
     cube.classList.add('active');
-    document.querySelector('.score').textContent = score = document.querySelector('.score').textContent + 1;
+    document.querySelector('.score').textContent = score = Number(document.querySelector('.score').textContent) + 1;
     
     getcode();
   }
@@ -38,7 +38,7 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
-    var score = Number(Number(code.substring(code.indexOf("s")+1,code.indexOf("$"))));
+    var score = Number(code.substring(code.indexOf("s")+1,code.indexOf("$")));
     document.querySelector('.score').textContent = score;
     
     c1.style.left = Number(code.substring(bindexOf(code,"$",1)+1,bindexOf(code,"$",2))) + 'px';
