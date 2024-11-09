@@ -82,7 +82,7 @@ body{
 }
 .settings{
     background-color: white;
-    position: relative;
+    position: absolute;
     left: 90%;
     top: 5%;
     
@@ -90,8 +90,8 @@ body{
     display: none;
 }
 .settings.active{
-    
     display: flex;
+    flex-wrap: wrap;
 }
 #sb{
     font-size: 30px;
