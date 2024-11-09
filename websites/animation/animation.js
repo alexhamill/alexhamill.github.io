@@ -7,7 +7,6 @@ function move(event) {
     cube.style.top = rany + 'px';
     cube.classList.add('active');
     document.querySelector('.score').textContent = score = Number(document.querySelector('.score').textContent) + 1;
-    
     getcode();
   }
 
