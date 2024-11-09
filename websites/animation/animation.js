@@ -27,7 +27,7 @@ function move(event) {
     return code;
   }
   function getcode(){
-    document.querySelector(".code").textContent=exp();
+    document.getElementById("displaycode").textContent=exp();
   }
   function decode(){
     var str = "a$b$c$d$f"
