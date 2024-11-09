@@ -82,8 +82,7 @@ body{
     position: absolute;
     left: 90%;
     top: 5%;
-    height: 50px;
-    width: 50px;
+    
     transition: .3s ease;
     display: none;
 }
