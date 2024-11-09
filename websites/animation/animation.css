@@ -95,5 +95,6 @@ body{
 #sb{
     font-size: 30px;
     cursor: pointer;
-    animation: textcolors 5s infinite;
+    color: red;
+    /* animation: textcolors 5s infinite; */
 }
