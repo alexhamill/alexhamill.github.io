@@ -82,7 +82,7 @@ body{
 }
 .settings{
     background-color: white;
-    position: absolute;
+    position: relative;
     left: 90%;
     top: 5%;
     
