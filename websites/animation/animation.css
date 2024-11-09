@@ -48,6 +48,14 @@
     75%{background-color: rgb(86, 169, 18);}
     100%{background-color: red;}
 }
+@keyframes textcolors {
+    0%{color: red;}
+    25%{color: blue;}
+    50%{color: rgb(0, 213, 255);}
+    75%{color: rgb(86, 169, 18);}
+    100%{color: red;}
+}
+
 
 .cube.active{
     animation: colors 5s infinite;
@@ -85,11 +93,7 @@ body{
     display: block;
 }
 #sb{
-    background-color: white;
-    position: absolute;
-    left: 40%;
-    top: 40%;
-    height: 50px;
-    width: 50px;
-    transition: .3s ease;
+    font-size: 30px;
+    cursor: pointer;
+    animation: textcolors 5s infinite;
 }
