@@ -17,6 +17,7 @@ function move(event) {
     cubes.forEach(function(cube) {
       cube.addEventListener('mouseenter', move);
     });
+    
   }
   function exp(){
     const c1 = document.querySelector(".cube1");
@@ -81,6 +82,10 @@ function move(event) {
     var cube = document.getElementById("sb"); 
     cube.addEventListener('click', opensetings);
     }
+
+  function copytext(){
+    navigator.clipboard.write(document.getElementById("copybutton").textContent);
+  }
   getcode();
   Listeners();
   Listenerss();
