@@ -85,7 +85,7 @@ body{
     position: absolute;
     left: 90%;
     top: 5%;
-    
+    width: 10%;
     transition: .3s ease;
     display: none;
 }
@@ -103,5 +103,5 @@ body{
 }
 #displaycode{
     overflow-x: scroll;
-    width: 100%;
+    width: 90%;
 }
