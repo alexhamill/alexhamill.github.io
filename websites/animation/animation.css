@@ -101,3 +101,6 @@ body{
     position: absolute;
     animation: textcolors 5s infinite;
 }
+#displaycode{
+    overflow-y: scroll
+}

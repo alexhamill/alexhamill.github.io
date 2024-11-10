@@ -37,6 +37,9 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
+    c1.classList.add('active');
+    c2.classList.add('active');
+    c3.classList.add('active');
     var score = Number(code.substring(code.indexOf("s")+1,code.indexOf("$")));
     document.querySelector('.score').textContent = score;
     
