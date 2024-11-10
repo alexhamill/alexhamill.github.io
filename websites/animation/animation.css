@@ -118,7 +118,7 @@ body{
     animation: textcolors 5s infinite;
     cursor: pointer;
 }
-#storecontainer.active{
+/* #storecontainer.active{
     display: flex;
     flex-wrap: wrap;
-}
+} */
