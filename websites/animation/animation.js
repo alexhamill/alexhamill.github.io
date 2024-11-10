@@ -68,6 +68,7 @@ function move(event) {
     cube.classList.toggle('active');
   }
   function openshop(){
+    console.log("openshop")
     document.getElementById("storecontainer").classList.toggle("active");
   }
   function bindexOf(str,s,n){
