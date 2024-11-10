@@ -103,3 +103,16 @@ body{
     overflow-x: scroll;
     width: 90%;
 }
+#storecontainer{
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    height: 60%;
+    width: 60%;
+    animation: textcolors 5s infinite;
+}
+#storecontainer.active{
+    display: flex;
+    flex-wrap: wrap;
+}
