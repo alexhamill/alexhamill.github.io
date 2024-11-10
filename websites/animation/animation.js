@@ -69,6 +69,7 @@ function move(event) {
   }
   function openshop(){
     console.log("openshop")
+    alert("shop please wtf");
     document.getElementById("storecontainer").classList.toggle("active");
   }
   function bindexOf(str,s,n){
