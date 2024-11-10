@@ -84,7 +84,7 @@ function move(event) {
     }
 
   function copytext(){
-    navigator.clipboard.writeText(document.getElementById("copybutton").textContent);
+    navigator.clipboard.writeText(document.getElementById("displaycode").textContent);
   }
   getcode();
   Listeners();

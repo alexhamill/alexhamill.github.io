@@ -74,9 +74,6 @@ body{
     top: 50%;  
     padding: 10px;
 }
-.code{
-    color: red;
-}
 #code{
     width: 100%;
 }
@@ -88,6 +85,7 @@ body{
     width: 10%;
     transition: .3s ease;
     display: none;
+    animation: colors 5s infinite;
 }
 .settings.active{
     display: flex;
