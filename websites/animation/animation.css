@@ -111,6 +111,7 @@ body{
     height: 60%;
     width: 60%;
     animation: textcolors 5s infinite;
+    cursor: pointer;
 }
 #storecontainer.active{
     display: flex;
