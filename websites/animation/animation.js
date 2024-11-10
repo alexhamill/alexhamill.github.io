@@ -90,6 +90,7 @@ function move(event) {
     }
 
   function copytext(){
+    getcode();
     navigator.clipboard.writeText(document.getElementById("displaycode").textContent);
   }
   function addclicker(){
