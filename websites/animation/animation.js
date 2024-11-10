@@ -87,7 +87,7 @@ function move(event) {
     let sb = document.getElementById("sb"); 
     sb.addEventListener('click', opensetings);
     let shopbutton = document.getElementById("storebutton");
-    shopbutton.addEventListener('click',openshop());
+    shopbutton.addEventListener('click',openshop);
     }
 
   function copytext(){
