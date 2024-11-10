@@ -96,6 +96,7 @@ function move(event) {
     if (score >= 15){
       clicker += 1;
       score -= 15;
+      document.querySelector('.score').textContent = score;
     }
   }
   getcode();
