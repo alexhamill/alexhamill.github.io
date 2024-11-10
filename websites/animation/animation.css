@@ -102,6 +102,6 @@ body{
     animation: textcolors 5s infinite;
 }
 #displaycode{
-    overflow-y: scroll;
+    overflow-x: scroll;
     width: 100%;
 }
