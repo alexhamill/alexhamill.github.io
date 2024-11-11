@@ -62,7 +62,7 @@
     
 }
 body{
-    background-color: black;
+    background-color: rgb(0, 0, 0);
 }
 /* html {
     cursor: url('favicon.ico'), default;
@@ -94,7 +94,7 @@ body{
 #sb{
     font-size: 30px;
     cursor: pointer;
-    left: 99%;
+    left: 95%;
     top: 0%;
     position: absolute;
     animation: textcolors 5s infinite;
@@ -117,8 +117,23 @@ body{
 #storebutton{
     animation: textcolors 5s infinite;
     cursor: pointer;
+    position: absolute;
+    left: 90%;
 }
 #storecontainer.active{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
 } 
+#b{
+    width: 30%;
+
+}
+.clickers{
+    background-size: cover; 
+    background-position: center; 
+    background-image:  url('download.png');
+    height: 20px;
+    width: 20px;
+    
+}

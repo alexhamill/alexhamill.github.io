@@ -1,5 +1,6 @@
 let clicker = 0; 
 let score = 0;
+let activeclickers = 0;
 function move(event) {
     let cube = event.currentTarget;
     const ranx = Math.floor(Math.random()*(window.innerWidth-50));
@@ -98,7 +99,30 @@ function move(event) {
       clicker += 1;
       score -= 15;
       document.querySelector('.score').textContent = score;
+      Makeclicker()
     }
+    
+  }
+  function Makeclicker(){
+    const clicker = document.createElement("div");
+    clicker.className = "clickers";
+    activeclickers += 1;
+    const a = "clicker" + activeclickers;
+    clicker.id=a;
+    document.body.appendChild(clicker);
+    moveclicker(clicker);
+  }
+  function moveclicker(curclicker){
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
+    const box = ".cube"+randomNumber;
+    let curcube = document.querySelector(box);
+    console.log(curcube);
+    curclicker.style.left = curcube.style.left;
+    curclicker.style.top = curcube.style.left;
+    move(curcube);
+    setTimeout(() => {
+      moveclicker(curclicker);
+    }, 2000); 
   }
   getcode();
   Listeners();
