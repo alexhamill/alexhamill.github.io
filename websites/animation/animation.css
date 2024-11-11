@@ -124,6 +124,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    z-index: 10;
 } 
 #b{
     width: 30%;
@@ -135,5 +136,6 @@ body{
     background-image:  url('download.png');
     height: 20px;
     width: 20px;
-    
+    position: absolute;
+    transition: 2s ease;
 }

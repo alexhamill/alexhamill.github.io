@@ -12,7 +12,17 @@ function move(event) {
     document.querySelector('.score').textContent = score;
     getcode();
   }
-
+  function mover(cub) {
+    let cube = cub;
+    const ranx = Math.floor(Math.random()*(window.innerWidth-50));
+    const rany = Math.floor(Math.random()*(window.innerHeight-50));
+    cube.style.left = ranx + 'px';
+    cube.style.top = rany + 'px';
+    cube.classList.add('active');
+    score += 1;
+    document.querySelector('.score').textContent = score;
+    getcode();
+  }
   
   
   function Listeners() {
@@ -26,7 +36,7 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
-    let code = "s" + score + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "x";
+    let code = "s" + score + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "$"+activeclickers+"x";
     code = code.replaceAll('px',"");
     return code;
   }
@@ -59,9 +69,12 @@ function move(event) {
     c3.style.left =  Number(code.substring(bindexOf(code,"$",5)+1,bindexOf(code,"$",6))) + 'px';
 
 
-    c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,code.indexOf("x"))) + 'px';
+    c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,bindexOf(code,"$",7))) + 'px';
    
-    
+    uninitclickers = Number(code.substring(bindexOf(code,"$",7)+1,code.indexOf("x")));
+    for (let i=activeclickers;i<uninitclickers;i++){
+      Makeclicker();
+    }
   }
 
   function opensetings() {
@@ -77,7 +90,7 @@ function move(event) {
     for (let i=0; i<n;i++){
       curentpos = str.indexOf(s,curentpos+1);
       if (curentpos === -1){
-        break;
+        return -1;
       }
     }
     return curentpos;
@@ -116,13 +129,15 @@ function move(event) {
     const randomNumber = Math.floor(Math.random() * 3) + 1;
     const box = ".cube"+randomNumber;
     let curcube = document.querySelector(box);
-    console.log(curcube);
     curclicker.style.left = curcube.style.left;
-    curclicker.style.top = curcube.style.left;
-    move(curcube);
+    curclicker.style.top = curcube.style.top;
     setTimeout(() => {
-      moveclicker(curclicker);
+      mover(curcube);
+      setTimeout(() => {
+        moveclicker(curclicker);
+      }, 2000); 
     }, 2000); 
+    
   }
   getcode();
   Listeners();
