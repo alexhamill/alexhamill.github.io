@@ -1,6 +1,7 @@
 let clicker = 0; 
 let score = 0;
 let activeclickers = 0;
+let multi = 1;
 function move(event) {
     let cube = event.currentTarget;
     const ranx = Math.floor(Math.random()*(window.innerWidth-50));
@@ -8,8 +9,8 @@ function move(event) {
     cube.style.left = ranx + 'px';
     cube.style.top = rany + 'px';
     cube.classList.add('active');
-    score += 1;
-    document.querySelector('.score').textContent = score;
+    score += 1*multi;
+    document.querySelector('.score').textContent = Math.round(score*10)/10;
     getcode();
   }
   function mover(cub) {
@@ -19,8 +20,8 @@ function move(event) {
     cube.style.left = ranx + 'px';
     cube.style.top = rany + 'px';
     cube.classList.add('active');
-    score += 1;
-    document.querySelector('.score').textContent = score;
+    score += 1*multi;
+    document.querySelector('.score').textContent = Math.round(score*10)/10;
     getcode();
   }
   
@@ -36,7 +37,7 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
-    let code = "s" + score + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "$"+activeclickers+"x";
+    let code = "s" + Math.round(score) + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "$"+activeclickers+"x";
     code = code.replaceAll('px',"");
     return code;
   }
@@ -111,8 +112,8 @@ function move(event) {
     if (score >= 15){
       clicker += 1;
       score -= 15;
-      document.querySelector('.score').textContent = score;
-      Makeclicker()
+      document.querySelector('.score').textContent = Math.round(score*10)/10;
+      Makeclicker();
     }
     
   }
@@ -139,6 +140,17 @@ function move(event) {
     }, 2000); 
     
   }
+    function upmulti(){
+      if (score >= 15){
+        clicker += 1;
+        score -= 15;
+        document.querySelector('.score').textContent = Math.round(score*10)/10;
+        multiup();
+      }
+    }
+    function multiup(){
+      multi += 0.1;
+    }
   getcode();
   Listeners();
   Listenerss();
