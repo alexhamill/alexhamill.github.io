@@ -37,7 +37,7 @@ function move(event) {
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
-    let code = "s" + Math.round(score) + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "$"+activeclickers+"x";
+    let code = "s" + Math.round(score) + "$" + c1.style.left + "$" + c1.style.top + "$" + c2.style.left + "$" + c2.style.top +"$"+ c3.style.left + "$" + c3.style.top + "$"+activeclickers+"$"+multi+"x";
     code = code.replaceAll('px',"");
     return code;
   }
@@ -46,7 +46,6 @@ function move(event) {
   }
   function decode(){
     let code = document.getElementById("code").value;
-    console.log(code);
     const c1 = document.querySelector(".cube1");
     const c2 = document.querySelector(".cube2");
     const c3 = document.querySelector(".cube3");
@@ -72,10 +71,11 @@ function move(event) {
 
     c3.style.top =  Number(code.substring(bindexOf(code,"$",6)+1,bindexOf(code,"$",7))) + 'px';
    
-    uninitclickers = Number(code.substring(bindexOf(code,"$",7)+1,code.indexOf("x")));
+    uninitclickers = Number(code.substring(bindexOf(code,"$",7)+1,bindexOf(code,"$",8)));
     for (let i=activeclickers;i<uninitclickers;i++){
       Makeclicker();
     }
+    multi = Number(code.substring(bindexOf(code,"$",8)+1,code.indexOf("x")));
   }
 
   function opensetings() {
