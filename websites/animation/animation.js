@@ -121,6 +121,7 @@ function move(event) {
     const clicker = document.createElement("div");
     clicker.className = "clickers";
     activeclickers += 1;
+    
     const a = "clicker" + activeclickers;
     clicker.id=a;
     document.body.appendChild(clicker);

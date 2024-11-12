@@ -139,3 +139,6 @@ body{
     position: absolute;
     transition: 2s ease;
 }
+#mub{
+    width: 30%;
+}
