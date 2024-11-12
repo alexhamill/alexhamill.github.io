@@ -4,7 +4,7 @@
     "name": "Launch Chrome against localhost",
     "url": "http://localhost:8080",
     "webRoot": "${workspaceFolder}",
-    "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", // Adjust the path if necessary
+    "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", 
     "trace": true
   }
   
