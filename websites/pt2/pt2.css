@@ -1,0 +1,8 @@
+#person{
+    
+    height: 100px;
+    width: 100px;
+    background-image: url(foward.gif);
+    background-size: cover; 
+    background-position: center; 
+}
