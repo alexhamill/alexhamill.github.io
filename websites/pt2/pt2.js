@@ -1,4 +1,4 @@
-const speed = 10;
+var speed = 10;
 const mydiv = document.getElementById("person");
 var keysPressed = {};
 var bf = ['assets/f1.png', 'assets/f2.png', 'assets/f3.png'];
@@ -25,6 +25,11 @@ function move(){
     cfi++;
     if (cfi >= gcf().length) {
         cfi = 0; 
+    }
+    if(keysPressed['shift']){
+        speed = 20;
+    }else{
+        speed = 10;
     }
     if(keysPressed['w']){
         const y = Number(mydiv.style.top.replaceAll('px',""));
