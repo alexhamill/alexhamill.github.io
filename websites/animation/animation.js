@@ -102,8 +102,13 @@ function move(event) {
     sb.addEventListener('click', opensetings);
     let shopbutton = document.getElementById("storebutton");
     shopbutton.addEventListener('click',openshop);
+    let newsbutton= document.getElementById("newsbutton");
+    newsbutton.addEventListener('click',opennews)
     }
-
+    function opennews(event){
+      newscontainer = document.getElementById("newscontainer");
+      newscontainer.classList.toggle("active");
+    }
   function copytext(){
     getcode();
     navigator.clipboard.writeText(document.getElementById("displaycode").textContent);

@@ -5,6 +5,7 @@
     animation-iteration-count: infinite;
     background-color: red;
     transition: 2s ease;
+    z-index: -10;
 }
 .cube1{
     animation: rotat 5s infinite;
@@ -104,27 +105,33 @@ body{
     width: 90%;
 }
 #storecontainer{
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    transition: 2s ease;
     position: absolute;
-    top: 20%;
+    top: 100%;
     left: 20%;
     height: 60%;
     width: 60%;
     animation: colors 5s infinite;
+    transition: 2s ease;
     
-
 }
 #storebutton{
     animation: textcolors 5s infinite;
     cursor: pointer;
     position: absolute;
     left: 90%;
+    
 }
 #storecontainer.active{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     z-index: 10;
+    top: 20%;
+    transition: 2s ease;
 } 
 #b{
     width: 30%;
@@ -141,4 +148,26 @@ body{
 }
 #mub{
     width: 30%;
+}
+#newscontainer{
+    background-color: #ffffff;
+    position: absolute;
+    height: 100%;
+    width: 30%;
+    
+    top: 0%;
+    z-index: -1;
+    transition: 2s ease;
+    left:100%;
+}
+#newscontainer.active{
+    left: 70%;
+    background-color: #ffffff;
+    transition: 2s ease;
+}
+#newsbutton{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    left: 85%;
 }
