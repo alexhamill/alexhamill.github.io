@@ -140,7 +140,7 @@ body{
 .clickers{
     background-size: cover; 
     background-position: center; 
-    background-image:  url('download.png');
+    background-image:  url('imges/download.png');
     height: 20px;
     width: 20px;
     position: absolute;

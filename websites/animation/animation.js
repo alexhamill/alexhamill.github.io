@@ -2,6 +2,8 @@ let score = 0;
 let activeclickers = 0;
 let multi = 1;
 let nummulti = 0;
+let speedupgrades = 0;
+let speedreduction = 0;
 function move(event) {
     let cube = event.currentTarget;
     const ranx = Math.floor(Math.random()*(window.innerWidth-50));
@@ -114,12 +116,12 @@ function move(event) {
     navigator.clipboard.writeText(document.getElementById("displaycode").textContent);
   }
   function addclicker(){
-    let cost = 15 + 2 ** activeclickers;
+    let cost = 14 + 2 ** activeclickers;
     if (score >= cost){
       removemoney(cost);
       updatescore();
       Makeclicker();
-      document.getElementById("clickercost").textContent = 15 + 2 ** activeclickers;
+      document.getElementById("clickercost").textContent = 14 + 2 ** activeclickers;
     }
     
   }
@@ -142,11 +144,11 @@ function move(event) {
       mover(curcube);
       setTimeout(() => {
         moveclicker(curclicker);
-      }, 2000); 
-    }, 2000); 
+      }, 2000 - speedreduction); 
+    }, 2000 - speedreduction); 
   }
     function upmulti(){
-      let cost = 15 + 2 ** nummulti;
+      let cost = 14 + 2 ** nummulti;
       if(score >= cost){
         removemoney(cost)
         updatescore();
@@ -166,6 +168,25 @@ function move(event) {
     }
     function updatescore(){
       document.querySelector('.score').textContent = Math.round(score*10)/10;
+    }
+    function speedreduce(){
+      const maxreduce = 1.9;
+      const sf = 0.1;
+      let reduce = maxreduce * (1- Math.exp(-sf * speedupgrades));
+      return reduce * 1000;
+    }
+    function speedupgrade(){
+      let cost = 14 + 2 ** speedupgrades;
+      if (score >= cost){
+        removemoney(score);
+        updatescore();
+        upgradespeed();
+        document.getElementById("speedupgradenumber").textContent = 14 + 2 ** speedupgrades;
+      }
+    }
+    function upgradespeed(){
+      speedupgrades += 1;
+      speedreduction = speedreduce();
     }
   getcode();
   Listeners();
