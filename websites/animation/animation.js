@@ -1,7 +1,7 @@
-let clicker = 0; 
-let score = 0;
+let score = 1000;
 let activeclickers = 0;
 let multi = 1;
+let nummulti = 0;
 function move(event) {
     let cube = event.currentTarget;
     const ranx = Math.floor(Math.random()*(window.innerWidth-50));
@@ -9,8 +9,8 @@ function move(event) {
     cube.style.left = ranx + 'px';
     cube.style.top = rany + 'px';
     cube.classList.add('active');
-    score += 1*multi;
-    document.querySelector('.score').textContent = Math.round(score*10)/10;
+    addmoney(1);
+    updatescore();
     getcode();
   }
   function mover(cub) {
@@ -20,8 +20,8 @@ function move(event) {
     cube.style.left = ranx + 'px';
     cube.style.top = rany + 'px';
     cube.classList.add('active');
-    score += 1*multi;
-    document.querySelector('.score').textContent = Math.round(score*10)/10;
+    addmoney(1);
+    updatescore();
     getcode();
   }
   
@@ -114,11 +114,12 @@ function move(event) {
     navigator.clipboard.writeText(document.getElementById("displaycode").textContent);
   }
   function addclicker(){
-    if (score >= 15){
-      clicker += 1;
-      score -= 15;
-      document.querySelector('.score').textContent = Math.round(score*10)/10;
+    let cost = 15 + 2 ** activeclickers;
+    if (score >= cost){
+      removemoney(cost);
+      updatescore();
       Makeclicker();
+      document.getElementById("clickercost").textContent = 15 + 2 ** activeclickers;
     }
     
   }
@@ -126,7 +127,6 @@ function move(event) {
     const clicker = document.createElement("div");
     clicker.className = "clickers";
     activeclickers += 1;
-    
     const a = "clicker" + activeclickers;
     clicker.id=a;
     document.body.appendChild(clicker);
@@ -144,18 +144,28 @@ function move(event) {
         moveclicker(curclicker);
       }, 2000); 
     }, 2000); 
-    
   }
     function upmulti(){
-      if (score >= 15){
-        clicker += 1;
-        score -= 15;
-        document.querySelector('.score').textContent = Math.round(score*10)/10;
+      let cost = 15 + 2 ** nummulti;
+      if(score >= cost){
+        removemoney(cost)
+        updatescore();
         multiup();
+        document.getElementById("multicost").textContent = 15 + 2 ** nummulti;
       }
     }
     function multiup(){
-      multi += 0.1;
+      multi += 2;
+      nummulti +=1;
+    }
+    function addmoney(amount){
+      score += amount*multi;
+    }
+    function removemoney(amount){
+      score -= amount;
+    }
+    function updatescore(){
+      document.querySelector('.score').textContent = Math.round(score*10)/10;
     }
   getcode();
   Listeners();
