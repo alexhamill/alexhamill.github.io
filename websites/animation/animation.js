@@ -188,8 +188,13 @@ function move(event) {
       const cli = document.querySelectorAll(".clickers");
       speedupgrades += 1;
       speedreduction = speedreduce();
+      const time = 2- speedreduce();
       cli.forEach(function(clicerss){
-        clicerss.style.transition = 'all 2'
+        clicerss.style.transition = 'all '+time + "s ease";
+      });
+      const box = document.querySelectorAll(".cube")
+      box.forEach(function(cube){
+        cube.style.transition = 'all '+time+"s ease";
       });
     }
   getcode();
