@@ -185,8 +185,12 @@ function move(event) {
       }
     }
     function upgradespeed(){
+      const cli = document.querySelectorAll(".clickers");
       speedupgrades += 1;
       speedreduction = speedreduce();
+      cli.forEach(function(clicerss){
+        clicerss.style.transition = 'all 2'
+      });
     }
   getcode();
   Listeners();
