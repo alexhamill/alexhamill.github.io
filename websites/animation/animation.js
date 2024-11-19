@@ -1,4 +1,4 @@
-let score = 0;
+let score = 100000000000;
 let activeclickers = 0;
 let multi = 1;
 let nummulti = 0;
