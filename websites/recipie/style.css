@@ -1,0 +1,16 @@
+#crainberrys{
+    background-color: #a84e3e;
+    padding: 10px;
+    width: calc(100% - 20px);
+}
+body{
+    align-items: center;
+    align-content: center;
+    background-color: #f2aa7d;
+}
+a{
+    display: block;
+    color: #d86c31;
+    text-decoration: none;
+    padding-bottom: 20px;
+}
