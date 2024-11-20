@@ -1,4 +1,4 @@
-let score = 100000000000;
+let score = 0;
 let activeclickers = 0;
 let multi = 1;
 let nummulti = 0;
@@ -157,7 +157,7 @@ function move(event) {
       }
     }
     function multiup(){
-      multi += 2;
+      multi *= 1.5;
       nummulti +=1;
     }
     function addmoney(amount){
@@ -178,7 +178,7 @@ function move(event) {
     function speedupgrade(){
       let cost = 14 + 2 ** speedupgrades;
       if (score >= cost){
-        removemoney(score);
+        removemoney(cost);
         updatescore();
         upgradespeed();
         document.getElementById("speedupgradenumber").textContent = 14 + 2 ** speedupgrades;
@@ -188,13 +188,13 @@ function move(event) {
       const cli = document.querySelectorAll(".clickers");
       speedupgrades += 1;
       speedreduction = speedreduce();
-      const time = 2- speedreduce();
+      const time = 2000 - speedreduction;
       cli.forEach(function(clicerss){
-        clicerss.style.transition = 'all '+time + "s ease";
+        clicerss.style.transition = 'all '+time + "ms ease";
       });
       const box = document.querySelectorAll(".cube")
       box.forEach(function(cube){
-        cube.style.transition = 'all '+time+"s ease";
+        cube.style.transition = 'all '+time+"ms ease";
       });
     }
   getcode();

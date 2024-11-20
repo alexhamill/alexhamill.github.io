@@ -64,6 +64,7 @@
 }
 body{
     background-color: rgb(0, 0, 0);
+    overflow: hidden;
 }
 /* html {
     cursor: url('favicon.ico'), default;
@@ -115,7 +116,7 @@ body{
     height: 60%;
     width: 60%;
     animation: colors 5s infinite;
-    transition: 2s ease;
+    transition: .5s ease;
     
 }
 #storebutton{
@@ -131,7 +132,7 @@ body{
     flex-direction: column;
     z-index: 10;
     top: 20%;
-    transition: 2s ease;
+    transition: .5s ease;
 } 
 #b{
     width: 30%;
@@ -157,13 +158,13 @@ body{
     
     top: 0%;
     z-index: -1;
-    transition: 2s ease;
+    transition: 1s ease;
     left:100%;
 }
 #newscontainer.active{
     left: 70%;
     background-color: #ffffff;
-    transition: 2s ease;
+    transition: 1s ease;
 }
 #newsbutton{
     position: absolute;
