@@ -78,7 +78,7 @@ function renderValidationResults(data) {
     box.style.position = "absolute";
     box.style.left = "0%";
     box.style.top = document.documentElement.scrollHeight;
-    box.style.margin = "0px";
+    box.style.margin = "15px";
     const link1 = document.createElement('a');
     const link2 = document.createElement('a');
     const spacer = document.createElement('pre');
@@ -104,8 +104,8 @@ function renderValidationResults(data) {
     ValidatorHTML += ` </strong></p>`;
     ValidatorHTML += `
         <p>
-            <a id="vLink1" href="https://validator.w3.org/check?uri=${window.location.href}"></a> 
-            <a id="vLink2" href="https://jigsaw.w3.org/css-validator/validator?uri=${window.location.href}?profile=css3"></a>
+            <a id="vLink1" href=" "></a> 
+            <a id="vLink2" href=" "></a>
         </p>
     `;
     
