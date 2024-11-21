@@ -82,8 +82,9 @@ function renderValidationResults(data) {
     const link1 = document.createElement('a');
     const link2 = document.createElement('a');
     const spacer = document.createElement('pre');
-    link1.href = "https://validator.w3.org/check?uri=${window.location.href}";
-    link2.href = "https://jigsaw.w3.org/css-validator/validator?uri=${window.location.href}?profile=css3";
+    location = window.location.href;
+    link1.href = "https://validator.w3.org/check?uri=" + location;
+    link2.href = "https://jigsaw.w3.org/css-validator/validator?uri=" + location + "?profile=css3";
     link1.style.color = "black";
     link2.style.color = "black";
     link1.textContent = "H";

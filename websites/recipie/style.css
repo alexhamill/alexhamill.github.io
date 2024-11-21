@@ -41,3 +41,6 @@ table{
     border-collapse: collapse;
     margin: auto;
 }
+#recipe{
+    background-color: whitesmoke;
+}
