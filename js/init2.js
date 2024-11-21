@@ -73,6 +73,7 @@ function renderValidationResults(data) {
     const box = document.createElement('div');
     document.body.appendChild(box);
     box.style.backgroundColor = "lightgreen";
+    box.style.display = "block";
     // box.style.width = "50px";
     // box.style.height = "25px";
     box.style.position = "absolute";

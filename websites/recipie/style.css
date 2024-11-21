@@ -30,6 +30,12 @@ div{
     align-content: center;
     justify-content: center;
     text-align: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+     margin-left: auto;
+    margin-right: auto;
 }
 th{
     border: 1px solid;
@@ -39,11 +45,17 @@ td{
 }
 table{
     border-collapse: collapse;
-    margin: auto;
+    
 }
 #recipe{
     background-color: whitesmoke;
 }
-#htmlcss{
-    margin: 10px;
+#olcontainer{
+    text-align: left;
+    align-self: center;
+    display: flex;
+    background-color: whitesmoke;
+}
+pre{
+    display: inline;
 }
