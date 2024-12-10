@@ -1,0 +1,12 @@
+body{
+    background-color: #325453;
+}
+*{
+    margin: auto;
+    max-width: fit-content;
+    margin-top: 10px;
+
+}
+h1{
+    background-color: grey;
+}
