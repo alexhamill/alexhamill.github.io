@@ -1,0 +1,45 @@
+#div1{
+    margin-left: 300px;
+    background-color: red;
+    height: 100px;
+    width: 100px;
+    background-clip: content-box;
+    border: 2px solid;
+}
+#div2{
+    background-color: blue;
+    height: 100px;
+    width: 100px;
+    background-clip: content-box;
+    margin-left: 400px;
+    padding: 100px;
+    border: 2px solid;
+}
+#div3{
+    height: 100px;
+    width: 100px;
+    background-clip: content-box;
+    background-color: green;
+    border: 2px solid;
+    padding-left: 20px;
+}
+#div4{
+    height: 100px;
+    width: 100px;
+    background-clip: content-box;
+    background-color: yellow;
+    border: 2px solid;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 40px;
+    margin-left: 300px;
+}
+#div5{
+    height: 100px;
+    background-clip: content-box;
+    width: 100px;
+    background-color: purple;
+    border: 2px solid;
+    margin-left: 200px;
+    padding-bottom: 100px;
+}
