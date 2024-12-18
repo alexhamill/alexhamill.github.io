@@ -1,0 +1,18 @@
+body{
+    background-color: wheat;
+    
+
+}
+#grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 300px;
+    gap: 10px;
+}
+#d1{
+    background-color: rebeccapurple;
+    grid-column: 2/4;
+    grid-row: 1/3;
+    
+}
