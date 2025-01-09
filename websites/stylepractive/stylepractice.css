@@ -1,0 +1,44 @@
+body{
+    background-color: black;
+    overflow: hidden;
+}
+.car{
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    animation: drive 3s linear ;
+
+}
+.cimg{
+    width: 600px;
+    height: auto;
+    transform: translateX(50px) translateY(-10px);
+    
+}
+.headlight{
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    width: 100px;
+    height: 5000px;
+    background: radial-gradient(ellipse at center, rgba(225, 225, 200, 1) 40%,rgba(225, 225, 200, 0) 100%);
+    transform-origin: top center;
+    filter: blur(30px);
+    transform: translateY(-50%) rotate(0deg);
+}
+.headlight.left{
+    left: 40px;
+    transform: translateY(20px) rotate(275deg);
+}
+.headlight.right{
+    right: 40px;
+    transform:  translateY(60px) rotate(272deg);
+}
+@keyframes drive {
+    from{
+        left: -300px;
+    }
+    to{
+        left: 50%;
+    }
+}

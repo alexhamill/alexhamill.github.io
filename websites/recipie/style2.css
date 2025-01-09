@@ -1,0 +1,35 @@
+th{
+    border: 1px solid;
+    background-color:blanchedalmond;
+}
+td{
+    border: 1px solid;
+    background-color: wheat;
+    box-shadow: 2px 2px;
+}
+table{
+    background-color: grey;
+    padding: 15px;
+    margin-top: 30px;
+}
+body{
+    background-color: brown;
+    
+}
+div{
+    max-width: fit-content;
+    margin: auto;
+}
+#steps2{
+    background-color: antiquewhite;
+    box-shadow: 10px 10px;
+}
+#intro2{
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: bisque;
+    margin: 50px;
+    border-style: solid;
+    border-width: 5px;
+}

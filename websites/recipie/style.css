@@ -10,6 +10,15 @@ body{
     background-color: #f2aa7d;
     text-align: center;
 }
+#futre{
+    background-color: rgb(0, 0, 0);
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    text-align: left;
+    align-items:baseline;
+    justify-content: left;
+}
 a{
     display: block;
     color: #d86c31;
@@ -30,6 +39,12 @@ div{
     align-content: center;
     justify-content: center;
     text-align: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+     margin-left: auto;
+    margin-right: auto;
 }
 th{
     border: 1px solid;
@@ -39,5 +54,62 @@ td{
 }
 table{
     border-collapse: collapse;
-    margin: auto;
+    
+}
+#recipe{
+    background-color: whitesmoke;
+}
+#olcontainer{
+    text-align: left;
+    align-self: center;
+    display: flex;
+    background-color: #f2aa7d;
+    background-size: cover; 
+    background-position: bottom; 
+    background-image:  url('picture/postit.png');
+    min-width:auto;
+    font-family: 'Schoolbell', arial, serif; 
+}
+#steps2{
+    margin-top: 50px;
+    text-align: left;
+    align-self: center;
+    display: flex;
+    background-color: rgb(0, 0, 0);
+    color: red;
+    padding-left: 25px;
+}
+pre{
+    display: inline;
+}
+#intro2{
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 50px;
+}
+.purple{
+    font-family: "Kalnia Glaze", serif;
+}
+.start{
+    color: rgb(0, 255, 0);
+    font-family: "Press Start 2P", system-ui;
+    
+    font-stretch:extra-condensed;
+}
+.left{
+    align-self: left;
+    align-items:normal;
+    align-content: normal;
+    justify-content:left;
+    text-align: left;
+    align-self: left;
+    display: flex;
+    flex-direction: left;
+    max-width: fit-content;
+    margin: 0px;
+}
+#ingrediends2{
+    align-self: left;
+    background-color: gray;
 }
