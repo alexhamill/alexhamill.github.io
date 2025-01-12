@@ -30,6 +30,10 @@ ol{
   grid-row: 3;
   grid-column: 3;
 }
+#cloud{
+  grid-column-start: 1;
+  grid-column-end:5;
+}
 a{
   color: rgb(0, 0, 0);
   text-decoration: none;
