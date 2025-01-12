@@ -21,10 +21,12 @@ ol{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
+  height: 500px;
+  width: 20%;
 }
 #snowflake1{
-  grid-row: 3;
-  grid-column: 3;
+  grid-row: 2;
+  grid-column: 2;
 }
 #snowflake2{
   grid-row: 3;
@@ -32,7 +34,8 @@ ol{
 }
 #cloud{
   grid-column-start: 1;
-  grid-column-end:5;
+  grid-column-end: 5;
+  width: 100%;
 }
 a{
   color: rgb(0, 0, 0);
