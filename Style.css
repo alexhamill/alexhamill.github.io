@@ -21,7 +21,7 @@ ol{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  height: 600px;
+  height: 320px;
   width: 20%;
   max-width: fit-content;
   margin-left: auto;
@@ -182,4 +182,9 @@ a{
       font-family: "Playwrite AU SA", serif;
       font-optical-sizing: auto;
       font-style: normal;
+    }
+    #me{
+      background-color: gray;
+      padding: 10px;
+      border: black 1px solid;
     }
