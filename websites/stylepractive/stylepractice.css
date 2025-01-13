@@ -6,7 +6,7 @@ body{
     position: absolute;
     bottom: 20%;
     left: 50%;
-    animation: drive 3s linear ;
+    animation: drive 3s infinite ;
 
 }
 .cimg{
