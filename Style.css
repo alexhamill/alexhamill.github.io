@@ -95,6 +95,9 @@ a{
     }
     .link{
       text-align: center;
+      /* border: #333 50px solid;
+      margin: 20px;
+      box-shadow: rgb(0, 0, 0) 0px 0px 10px; */
     }
 
     body {
