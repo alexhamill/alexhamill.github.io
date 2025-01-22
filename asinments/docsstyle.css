@@ -1,0 +1,38 @@
+/* ==UserStyle==
+@name           docs.google.com
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         Me
+==/UserStyle== */
+@-moz-document domain("docs.google.com") {
+
+	body {
+		background-color: aquamarine;
+	}
+	.docs-homescreen-item-container,
+	.gb_wd,
+	.docs-homescreen-floater-header-cell,
+	.gb_kd,
+	.docs-homescreen-itemholder-content,
+	.docs-homescreen-grid-header,
+	div,
+	form,
+	.goog-inline-block,
+	.gb_hd {
+		background-color: aquamarine;
+	}
+	div,
+	form,
+	.gb_hd,
+	button,
+	.gb_ye,
+	.gb_De,
+	.kix-outlines-widget-header-contents,#docs-chrome,.navigation-widget {
+		background-color: aquamarine;
+		border-color: aquamarine;
+	}
+	div{
+		background-color: aquamarine !important;
+	}
+}
