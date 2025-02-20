@@ -1,3 +1,8 @@
+#Gallery{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+}
 #p2{
     object-fit: cover;
     object-position: right top;
@@ -83,4 +88,26 @@ img{
     padding: 0px;
     width: 300px;
     height: 300px;
+}
+
+#z1{
+    width: 400px;
+    height: 400px;
+}
+#p21{
+    object-fit: cover;
+    position: absolute;
+    
+    z-index: 1;
+}
+#p22{
+    object-fit: cover;
+    position: relative;
+    top: 10%;
+    left: 10%;
+    z-index: 0;
+}
+
+figure{
+    margin: 0px;
 }
