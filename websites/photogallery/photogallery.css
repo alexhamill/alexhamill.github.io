@@ -74,10 +74,6 @@
     object-fit: cover;
     filter: drop-shadow(8px 8px 10px red);
 }
-#p21{
-    object-fit: cover;
-    filter: drop-shadow(8px 8px 10px green);
-}
 #div1{
     width: 400px;
     height: 400px;
