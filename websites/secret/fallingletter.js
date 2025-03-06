@@ -15,6 +15,7 @@ function createFallingLetter() {
         middlecount=0;
     }
     middlecount++;
+    letter.style.animation = "fall " + (Math.random()*.1+1.9) + "s linear infinite";
     letter.style.position = "absolute";
     letter.style.left = randomX + "px";
     letter.innerText = String.fromCharCode(65 + Math.floor(Math.random() * 26));
