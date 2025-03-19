@@ -196,22 +196,27 @@ a{
       background-color: gray;
       padding: 10px;
       border: black 1px solid;
-      grid-area: picture;
+      
     }
     #responsivegrid{
+      justify-content: center;
+      align-items: center;
       display: grid;
       grid-template-areas:
-      'picture  snow';
+      'picture snow';
     }
     @media screen and (max-width: 600px){
       #responsivegrid{
         display: grid;
         grid-template-areas:
-        'ssnow'
+        'snow'
         'picture';
       }
       
     }
     #grid{
-      grid-area: ssnow;
+      grid-area: snow;
+    }
+    #mapthing{
+      grid-area: picture;
     }
