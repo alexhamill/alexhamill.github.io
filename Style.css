@@ -24,8 +24,6 @@ ol{
   height: 320px;
   width: 20%;
   max-width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
 }
 hr{
   color: #333;
@@ -198,4 +196,22 @@ a{
       background-color: gray;
       padding: 10px;
       border: black 1px solid;
+      grid-area: picture;
+    }
+    #responsivegrid{
+      display: grid;
+      grid-template-areas:
+      'picture  snow';
+    }
+    @media screen and (max-width: 600px){
+      #responsivegrid{
+        display: grid;
+        grid-template-areas:
+        'ssnow'
+        'picture';
+      }
+      
+    }
+    #grid{
+      grid-area: ssnow;
     }
