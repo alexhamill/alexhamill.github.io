@@ -210,8 +210,9 @@ a{
       #responsivegrid{
         display: grid;
         grid-template-areas:
+        'picture'
         'snow'
-        'picture';
+        ;
       }
       
     }
