@@ -199,8 +199,9 @@ a{
       
     }
     #responsivegrid{
-      justify-content: center;
-      align-items: center;
+      width: min-content;
+      margin: auto;
+      gap: 40px;
       display: grid;
       grid-template-areas:
       'picture snow';
@@ -215,8 +216,11 @@ a{
       
     }
     #grid{
+      
+      
       grid-area: snow;
     }
     #mapthing{
+      width: 100%;
       grid-area: picture;
     }
