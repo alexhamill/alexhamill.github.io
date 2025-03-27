@@ -60,3 +60,6 @@ We'll use this to inform our study plan for the test.
 ## Study Plan
 
 (We'll start filling this part in next class)
+
+I Made a page with a few inputs with all different types Email, tel, ect. I made it Accessible because i wanted more practice on that. I used min and max and a number input to get a scaled of 1-10. i also used the pattern to make it accept only normal 10 digit numbers.
+[TestPrep](../../websites/testprep/testprep.html    )

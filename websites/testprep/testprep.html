@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Prep</title>
+</head>
+<body>
+    <h1>Certification exam</h1>
+    <h2>Fill out this form to let us know how you feel</h2>
+    <form action="testprep.html" method="get">
+        <label for="name">Name:</label>
+        <input type="name" id="name" placeholder="Whats your name"><br>
+        <label for="email">Email:</label>
+        <input id="email" type="email" placeholder="Whats your email"><br>
+        <label for="phone">Phone:</label>
+        <input id="phone" type="tel" placeholder="Whats your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
+        <label for="feel">How do you feel about the test on a scale of 1-10?</label>
+        <input id="feel" type="number" min="0" max="10" placeholder="How do you feel about the test on a scale of 1-10?"><br>
+        <label for="study">How many hours did you study?</label>
+        <input id="study" type="number" min="0" placeholder="How many hours did you study?"><br>
+        
+
+        <button type="submit">Submit</button>   
+    </form>
+</body>
+</html>
