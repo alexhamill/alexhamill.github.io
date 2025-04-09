@@ -12,3 +12,5 @@
 
 [Off The Pike](entries/offthepike.md)
 
+[study guide](entries/studyguide.md)
+
