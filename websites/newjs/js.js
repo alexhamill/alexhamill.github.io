@@ -43,14 +43,15 @@ function flagstars(x,y){
     while (i < 9){
         while (col < 5-i%2){
             if (i%2 == 0){
-                u = 20;
+                u = 0;
             } else {
-                u = 10;
+                u = 20;
             }
-            star(x+40*col+10,y+20*i,5);
+            star(x+u+40*col+10,y+(10*(i)),4);
             col++;
         }
     i++;
+    col = 0;
     }
 }
 function flag(x,y){
