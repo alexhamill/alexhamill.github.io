@@ -39,7 +39,7 @@ function flagstars(x,y){
     var u = 0; 
     var col = 0;
     ctx.fillStyle = "blue";
-    ctx.fillRect(x,y,200,100);
+    ctx.fillRect(x,y,185    ,100);
     while (i < 9){
         while (col < 5-i%2){
             if (i%2 == 0){
