@@ -65,7 +65,6 @@ function drawFlags() {
         let x = Math.random() * 2000;  
         flag(x, y);
         p++;
-        window.open(window.location.href, '_blank');
         requestAnimationFrame(drawFlags);
     }
 }
