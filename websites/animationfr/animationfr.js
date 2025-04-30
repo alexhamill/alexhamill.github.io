@@ -8,15 +8,15 @@ const enemy = {
     dx: 5,
     dy: 4
 };
-
-
+const keys = {}
 const player = {
     x: 50,
     y: 50,
     color: "blue",
-    speed: 5,
+    speed: 7,
     dx: 0,
-    dy: 0
+    dy: 0,
+    score: 0
 }
 //define functions
 function drawRect(x,y) {
@@ -42,61 +42,49 @@ function snowman(x,y){
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    player.x += player.dx;
-    player.y += player.dy;
+    move();
     circle(player.x, player.y, 100, player.color);
     snowman(enemy.x, enemy.y);
+    drawscoreboard();
     if (enemy.x + 50 > window.innerWidth || enemy.x < 0) {
         enemy.dx = -enemy.dx;
     }
     if (enemy.y + 50 > window.innerHeight || enemy.y < 0) {
         enemy.dy = -enemy.dy;
     }
-    if (player.x + 50 > window.innerWidth || player.x < 0) {
-        player.dx = -player.dx;
+    if (player.x > window.innerWidth || player.x < 0) {
+        player.x = window.innerWidth-(player.x);
     }
-    if (player.y + 50 > window.innerHeight || player.y < 0) {
-        player.dy = -player.dy;
+    if (player.y > window.innerHeight || player.y < 0) {
+        player.y = window.innerHeight-(player.y);
     }
     enemy.x += enemy.dx;
     enemy.y += enemy.dy;
+    player.x += player.dx;
+    player.y += player.dy;
 
     requestAnimationFrame(animate);
 }
 
 //call our function
-animate();
+function drawscoreboard(){
+    ctx.font = "10px Arial";
+    ctx.fillText("Score: " + player.score, 10, 20);
+    ctx.fillText("Player Position: (" + player.x + ", " + player.y + ")", 10, 40);
+    ctx.fillText("Enemy Position: (" + enemy.x + ", " + enemy.y + ")", 10, 60);
+    ctx.fillText("Player Speed: " + player.speed, 10, 80);
+    ctx.fillText("Enemy Speed: (" + enemy.dx + ", " + enemy.dy + ")", 10, 100);
+}
 
 function listen(){
-    document.addEventListener("keydown", moveplayer);
-    document.addEventListener("keyup", stopplayer);
+    document.addEventListener("keydown", keydown);
+    document.addEventListener("keyup", keyup);
 }
-function moveplayer(e){
-    // console.log(player.speed)
-    if(e.key == "w"){
-        player.dy = -player.speed;
-    }
-    if(e.key == "s"){
-        player.dy = player.speed;
-    }
-    if(e.key == "a"){
-        player.dx = -player.speed;
-    }
-    if(e.key == "d"){
-        player.dx = player.speed;
-    }
-    if(e.key == " "){
-        requestAnimationFrame(() => jump(0));
-    }
+function keydown(e){
+    keys[e.key] = true;
 }
-listen();
-function stopplayer(e){
-    if(e.key == "w" || e.key == "s"){
-        player.dy = 0;
-    }
-    if(e.key == "a" || e.key == "d"){
-        player.dx = 0;
-    }
+function keyup(e){
+    keys[e.key] = false;
 }
 function jump(x){
     const originalSpeed = player.speed;    
@@ -112,3 +100,22 @@ function jump(x){
         player.speed = originalSpeed; 
     }
 }
+function move(){
+    if(keys["w"]){
+        player.dy = -player.speed;
+    } else if(keys["s"]){
+        player.dy = player.speed;
+    } else {
+        player.dy = 0;
+    }
+    if(keys["a"]){
+        player.dx = -player.speed;
+    } else if(keys["d"]){
+        player.dx = player.speed;
+    } else {
+        player.dx = 0;
+    }
+}
+
+animate();
+listen();
