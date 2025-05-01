@@ -13,7 +13,8 @@ const player = {
     speed: 7,
     dx: 0,
     dy: 0,
-    score: 0
+    score: 0,
+    radius: 50,
 }
 const arrowsetings = {
     speed: (chargeTime) => {
@@ -32,16 +33,22 @@ const bow = {
     radius: 100,
     midpoint: 45,
 }
-const arrows = [];
+
 const game = { 
     state: true
 }
+const arrows = [];
+const enemies = [];
 // draw functions
 function circle(x,y,r,color){
     ctx.beginPath();
     ctx.arc(x,y,r,0,2*Math.PI);
     ctx.fillStyle = color;
     ctx.fill();
+}
+
+drawplayer = function(x,y,r,color){
+    circle(x,y,r,color);
 }
 
 function drawbow(x,y){
@@ -62,25 +69,26 @@ function drawbow(x,y){
 
 function drawarrow(x,y,angle){
     ctx.save();
+    const offset = 5;
     ctx.translate(x, y);
     ctx.rotate(angle);
     ctx.fillStyle = "#8e4839";
-    ctx.fillRect(-5, -5, 25, 10);
+    ctx.fillRect(-20-offset, -5, 25, 10);
     ctx.beginPath();
-    ctx.moveTo(30, 0);
-    ctx.lineTo(20, -7);
-    ctx.lineTo(20, 7);
+    ctx.moveTo(15-offset, 0);
+    ctx.lineTo(5-offset, -7);
+    ctx.lineTo(5-offset, 7);
     ctx.closePath();
     ctx.fillStyle = "gray";
     ctx.fill();
     ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(-8, -10);
-    ctx.lineTo(-8, 10);
+    ctx.moveTo(-15-offset, 0);
+    ctx.lineTo(-23-offset, -10);
+    ctx.lineTo(-23-offset, 10);
     
-    ctx.moveTo(-5, 0);
-    ctx.lineTo(-13, -10);
-    ctx.lineTo(-13, 10);
+    ctx.moveTo(-20-offset, 0);
+    ctx.lineTo(-28-offset, -10);
+    ctx.lineTo(-28-offset, 10);
     ctx.closePath();
     ctx.fillStyle = "white";
     ctx.fill();
@@ -93,6 +101,21 @@ function scoreboard(){
     ctx.fillText("Score: " + player.score, 10, 50);
 }
 
+function drawenemy(x, y, color, width){ 
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, width, width);
+}
+
+function drawenemys(){
+    enemies.forEach(enemy => {
+        drawenemy(enemy.x, enemy.y,enemy.color,enemy.width);
+        enemy.lifetime++;
+    });
+    if(enemies.length < 5){
+        makeenemy();
+    }
+}
+
 
 // main loop
 function animate() {
@@ -103,13 +126,16 @@ function animate() {
     // pre rendering math should prob be here
     move();
     movearrows();
-    
+    allcolisions();
+    moveenemies();
+
+
     //draw
-    circle(player.x, player.y, 50, player.color);
+    drawplayer(player.x, player.y, player.radius, player.color);
     drawbow(player.x, player.y);
     scoreboard();
     fire();
-    
+    drawenemys();
     // player movement
     player.x += player.dx;
     player.y += player.dy;
@@ -117,6 +143,12 @@ function animate() {
     // for now the game stops rendering when it ends
     if(game.state){
         requestAnimationFrame(animate);
+    }
+    if(game.state == false){
+        ctx.font = "50px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("Game Over", canvas.width/2 - 190, 100);
+        ctx.fillText("Score: " + player.score, canvas.width/2 - 150, 200);
     }
 }
 
@@ -175,6 +207,75 @@ function mousemove(e){
     // console.log("angle", bow.Angle);
 }
 
+function makeenemy(){
+    enemies.push({
+        x: Math.random() * (window.innerWidth-100),
+        y: Math.random() * (window.innerHeight-100),
+        color: "red",
+        lifetime: 0,
+        speed: () => Math.random() * 2 + 1,
+        width: 50,
+        target: {
+            x: Math.random() * (window.innerWidth-100),
+            y: Math.random() * (window.innerHeight-100),
+        },
+    });
+    4 * Math.sin(lifetime)
+    
+}
+
+function moveenemies(){
+    enemies.forEach(enemy => {
+        moveenemy(enemy);
+    });
+}
+
+function moveenemy(enemy){
+    if((enemy.x -  enemy.target.x) < enemy.speed + 1 && (enemy.y -  enemy.target.y) < enemy.speed + 1){
+        console.log("enemy target");
+        enemy.target.x = Math.random() * (window.innerWidth-100);
+        enemy.target.y = Math.random() * (window.innerHeight-100);
+    }
+    const dx = ((enemy.target.x - enemy.x)%1)*enemy.speed;
+    const dy = ((enemy.target.y - enemy.y)%1)*enemy.speed;
+    enemy.x += dx;
+    enemy.y += dy;
+}
+
+
+// collision detection
+function allcolisions(){
+    arrows.forEach(arrow => {
+        if(colisioncircle(arrow, player)){
+            game.state = false;
+                arrows.splice(arrows.indexOf(arrow), 1);
+        }
+        enemies.forEach(enemy => {
+            if(colisionsquare(arrow, enemy)){
+                player.score++;
+                arrows.splice(arrows.indexOf(arrow), 1);
+                enemies.splice(enemies.indexOf(enemy), 1);
+            }
+        });
+    });
+}
+function colisioncircle(arrow, object){
+    const dx = arrow.x - object.x;
+    const dy = arrow.y - object.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < object.radius) {
+        return true;
+    }
+    return false;
+}
+function colisionsquare(arrow, object){
+    if (arrow.x > object.x && arrow.x < object.x + object.width && arrow.y > object.y && arrow.y < object.y + object.width) {
+        return true;
+    }
+    return false;
+}
+
+
 // listiners
 function listen(){
    document.addEventListener("mousemove", mousemove);
@@ -207,11 +308,17 @@ function mouseup(e){
 }
 
 function keydown(e){
-    keys[e.key] = true;
+    keys[e.key] = true; 
+    if(e.key == " "){
+        mousedown(e);
+    }
 }
 
 function keyup(e){
     keys[e.key] = false;
+    if(e.key == " "){
+        mouseup(e); 
+    }
 }
 
 
