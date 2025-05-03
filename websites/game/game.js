@@ -5,6 +5,14 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // variables and objects
+const fps ={
+    now : 0,
+    then : Date.now(),
+    interval : 0,
+    start : 0,
+    elapsed : 0,
+    fps : 0,
+}
 const player = {
     x: 150,
     y: 150,
@@ -17,7 +25,7 @@ const player = {
 }
 const presets = {
     arrowspeed: (chargeTime) => {
-        const speed = Math.sqrt(chargeTime * 5 ) * 1
+        let speed = Math.sqrt(chargeTime * 5 ) * 1
         if (speed < .5){
             speed = 1;
         }
@@ -41,7 +49,7 @@ const bow = {
 }
 
 const game = { 
-    state: true
+    state: "playing",
 }
 const arrows = [];
 const enemies = [];
@@ -121,11 +129,17 @@ function drawenemys(){
         makeenemy();
     }
 }
-
+function fpscheck(){
+    fps.then = fps.now || Date.now();
+    fps.now = Date.now();
+    fps.elapsed = fps.now - fps.then;
+    fps.fps = Math.round(1000 / fps.elapsed);
+    console.log("fps:", fps.fps);
+}
 
 // main loop
 function animate() {
-
+    fpscheck();
     // I need to rember to keep the clear rect at the top
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -142,16 +156,17 @@ function animate() {
     scoreboard();
     fire();
     drawenemys();
+
     // player movement
     player.x += player.dx;
     player.y += player.dy;
 
     // for now the game stops rendering when it ends
-    if(game.state){
-        setTimeout(() => {
-        requestAnimationFrame(animate);}, 1);
+    if(game.state === "playing"){
+        requestAnimationFrame(animate);
     }
-    if(game.state == false){
+    
+    if(game.state == "died"){
         ctx.font = "50px Arial";
         ctx.fillStyle = "black";
         ctx.fillText("Game Over", canvas.width/2 - 190, 100);
@@ -238,7 +253,6 @@ function moveenemy(enemy){
         enemy.target.x = Math.random() * (canvas.width-100);
         enemy.target.y = Math.random() * (canvas.height-100);//Math.random() * (canvas.height-100);
     }
-    // console.log("enemy target",enemy.speed(enemy.lifetime) )
     if(Math.abs(enemy.x-enemy.target.x) > enemy.speed(enemy.lifetime)){
         const dx = Math.sign(enemy.target.x - enemy.x) * enemy.speed(enemy.lifetime);
         enemy.x += dx;
@@ -258,7 +272,7 @@ function moveenemy(enemy){
 function allcolisions(){
     arrows.forEach(arrow => {
         if(colisioncircle(arrow, player)){
-            game.state = false;
+            game.state = "died";
                 arrows.splice(arrows.indexOf(arrow), 1);
         }
         enemies.forEach(enemy => {
