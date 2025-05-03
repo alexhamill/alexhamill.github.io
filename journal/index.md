@@ -14,3 +14,5 @@
 
 [study guide](entries/studyguide.md)
 
+[Canvas game](entries/Canvasgame.md)
+

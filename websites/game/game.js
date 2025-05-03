@@ -1,9 +1,8 @@
 // canvas
-
-const canvas = document.getElementById("myCanvas");
+const canvas = document.getElementById("gamecanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight-5;
+canvas.height = window.innerHeight;
 
 // variables and objects
 const player = {
@@ -16,9 +15,16 @@ const player = {
     score: 0,
     radius: 50,
 }
-const arrowsetings = {
-    speed: (chargeTime) => {
-        return Math.sqrt(chargeTime * 5 ) * 1;
+const presets = {
+    arrowspeed: (chargeTime) => {
+        const speed = Math.sqrt(chargeTime * 5 ) * 1
+        if (speed < .5){
+            speed = 1;
+        }
+        return speed;
+    },
+    enemiespeed: (lifetime) => {
+        return 3 * Math.floor((Math.sin(lifetime)+2));
     },
 };
 const keys = {}
@@ -111,7 +117,7 @@ function drawenemys(){
         drawenemy(enemy.x, enemy.y,enemy.color,enemy.width);
         enemy.lifetime++;
     });
-    if(enemies.length < 5){
+    if(enemies.length < 2){
         makeenemy();
     }
 }
@@ -142,7 +148,8 @@ function animate() {
 
     // for now the game stops rendering when it ends
     if(game.state){
-        requestAnimationFrame(animate);
+        setTimeout(() => {
+        requestAnimationFrame(animate);}, 1);
     }
     if(game.state == false){
         ctx.font = "50px Arial";
@@ -156,8 +163,8 @@ function animate() {
 function fire(){
     if(bow.charging){
         bow.chargetime++;
-        bow.radius = 100 + arrowsetings.speed(bow.chargetime)/3;
-        bow.midpoint = 45 - arrowsetings.speed(bow.chargetime)/3;
+        bow.radius = 100 + presets.arrowspeed(bow.chargetime)/3;
+        bow.midpoint = 45 - presets.arrowspeed(bow.chargetime)/3;
     }
     if(bow.firing){
         bow.frame++;
@@ -200,11 +207,9 @@ function move(){
 }
 
 function mousemove(e){
-    // console.log("mousemove",e);
     const mouseX = e.clientX;
     const mouseY = e.clientY;
     bow.Angle = Math.atan2(mouseY - player.y, mouseX - player.x);
-    // console.log("angle", bow.Angle);
 }
 
 function makeenemy(){
@@ -213,15 +218,13 @@ function makeenemy(){
         y: Math.random() * (window.innerHeight-100),
         color: "red",
         lifetime: 0,
-        speed: () => Math.random() * 2 + 1,
+        speed: (x) => presets.enemiespeed(x),
         width: 50,
         target: {
             x: Math.random() * (window.innerWidth-100),
             y: Math.random() * (window.innerHeight-100),
         },
     });
-    4 * Math.sin(lifetime)
-    
 }
 
 function moveenemies(){
@@ -231,15 +234,23 @@ function moveenemies(){
 }
 
 function moveenemy(enemy){
-    if((enemy.x -  enemy.target.x) < enemy.speed + 1 && (enemy.y -  enemy.target.y) < enemy.speed + 1){
-        console.log("enemy target");
-        enemy.target.x = Math.random() * (window.innerWidth-100);
-        enemy.target.y = Math.random() * (window.innerHeight-100);
+    if(Math.abs(enemy.x - enemy.target.x) < enemy.speed(enemy.lifetime) && Math.abs(enemy.y - enemy.target.y) < enemy.speed(enemy.lifetime)){
+        enemy.target.x = Math.random() * (canvas.width-100);
+        enemy.target.y = Math.random() * (canvas.height-100);//Math.random() * (canvas.height-100);
     }
-    const dx = ((enemy.target.x - enemy.x)%1)*enemy.speed;
-    const dy = ((enemy.target.y - enemy.y)%1)*enemy.speed;
-    enemy.x += dx;
-    enemy.y += dy;
+    // console.log("enemy target",enemy.speed(enemy.lifetime) )
+    if(Math.abs(enemy.x-enemy.target.x) > enemy.speed(enemy.lifetime)){
+        const dx = Math.sign(enemy.target.x - enemy.x) * enemy.speed(enemy.lifetime);
+        enemy.x += dx;
+    } else {
+        const dx = 0;
+    }
+    if(Math.abs(enemy.y-enemy.target.y) > enemy.speed(enemy.lifetime)){
+        const dy = Math.sign(enemy.target.y - enemy.y) * enemy.speed(enemy.lifetime);
+        enemy.y += dy;
+    } else {
+        const dy = 0;
+    }
 }
 
 
@@ -297,9 +308,9 @@ function mouseup(e){
     arrows.push({
         x: player.x + bow.radius * Math.cos(bow.Angle),
         y: player.y + bow.radius * Math.sin(bow.Angle),
-        speed: arrowsetings.speed(bow.chargetime),
-        dx: Math.cos(bow.Angle) * arrowsetings.speed(bow.chargetime),
-        dy: Math.sin(bow.Angle) * arrowsetings.speed(bow.chargetime),
+        speed: presets.arrowspeed(bow.chargetime),
+        dx: Math.cos(bow.Angle) * presets.arrowspeed(bow.chargetime),
+        dy: Math.sin(bow.Angle) * presets.arrowspeed(bow.chargetime),
         angle: bow.Angle,
     });
     bow.chargetime = 0;
@@ -309,14 +320,14 @@ function mouseup(e){
 
 function keydown(e){
     keys[e.key] = true; 
-    if(e.key == " "){
+    if(e.key == " " || e.key == "q"){
         mousedown(e);
     }
 }
 
 function keyup(e){
     keys[e.key] = false;
-    if(e.key == " "){
+    if(e.key == " " || e.key == "q"){
         mouseup(e); 
     }
 }
@@ -325,4 +336,5 @@ function keyup(e){
 
 // running the functions
 listen();
+drawFlowergrassfeild(100, 200);
 animate();
