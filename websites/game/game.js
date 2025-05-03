@@ -13,6 +13,13 @@ const fps ={
     elapsed : 0,
     fps : 0,
 }
+const fpsset={
+    now : 0,
+    then : Date.now(),
+    interval : 1000/60, // put 1000/fps you want slower fps means slower game
+    elapsed : 0,
+
+}
 const player = {
     x: 150,
     y: 150,
@@ -136,21 +143,33 @@ function fpscheck(){
     fps.fps = Math.round(1000 / fps.elapsed);
     console.log("fps:", fps.fps);
 }
+function fpslimiter(){
+    fpsset.now = Date.now();
+    fpsset.elapsed = fpsset.now - fpsset.then;
+    if (fpsset.elapsed > fpsset.interval) {
+        fpsset.then = fpsset.now - (fpsset.elapsed % fpsset.interval);
+        return true;
+    } else {
+        return false;
+    }
+}
 
 // main loop
 function animate() {
+    // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
+    if (fpslimiter()) {
     fpscheck();
-    // I need to rember to keep the clear rect at the top
+
+    // I need to remember to keep the clear rect at the top
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // pre rendering math should prob be here
+    // pre-rendering math should probably be here
     move();
     movearrows();
     allcolisions();
     moveenemies();
 
-
-    //draw
+    // draw
     drawplayer(player.x, player.y, player.radius, player.color);
     drawbow(player.x, player.y);
     scoreboard();
@@ -162,16 +181,16 @@ function animate() {
     player.y += player.dy;
 
     // for now the game stops rendering when it ends
-    if(game.state === "playing"){
-        requestAnimationFrame(animate);
-    }
-    
-    if(game.state == "died"){
+    if (game.state === "died") {
         ctx.font = "50px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText("Game Over", canvas.width/2 - 190, 100);
-        ctx.fillText("Score: " + player.score, canvas.width/2 - 150, 200);
+        ctx.fillText("Game Over", canvas.width / 2 - 190, 100);
+        ctx.fillText("Score: " + player.score, canvas.width / 2 - 150, 200);
+        return;
     }
+}
+
+requestAnimationFrame(animate);
 }
 
 // math functions
