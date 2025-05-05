@@ -180,8 +180,14 @@ function drawenemys(){
 function animate() {
     // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
     if (fpslimiter()) {
+<<<<<<< HEAD
     // fpscheck();
     
+=======
+        
+    // fpscheck();
+
+>>>>>>> aeee9479c099af465bb578eb1377421ae333c984
     // I need to remember to keep the clear rect at the top
     if (game.state === "playing") {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
