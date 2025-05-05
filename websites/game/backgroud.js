@@ -1,7 +1,7 @@
 const background = document.getElementById("background");
 const backctx = background.getContext("2d");
-background.width = window.innerWidth;
-background.height = window.innerHeight;
+background.width = window.innerWidth * .99;
+background.height = window.innerHeight * .99;
 const colors = ['#FF69B4', '#FF1493', '#FFB6C1', '#FF69B4','#ff6f6f','#d161f7',"#8a61ff","#61d7ff","#61ff8a","#ff6161","#ff61d7","#d7ff61"];
 
 // random cube grass
@@ -110,12 +110,19 @@ function drawFlowerField(numFlowers) {
   }
 }
 function drawFlowergrassfeild(flowers,grass){
-    backctx.fillStyle = "#83e967"; 
-    backctx.fillRect(0, 0, background.width, background.height);
-    drawGrassField(grass);
-    drawFlowerField(flowers);
+  backctx.fillStyle = "#83e967"; 
+  backctx.fillRect(0, 0, background.width, background.height);
+  drawGrassField(grass);
+  drawFlowerField(flowers);
 }
 
-// drawFlowergrassfeild(550, 11200);
-//   randomcubes(1000);
-//   maketiles(50);
+function pausebutton(){
+  backctx.fillStyle = "black";
+  backctx.fillRect(background.width - 15, 10, 10, 30);
+  backctx.fillRect(background.width - 35, 10, 10, 30);
+}
+function drawlevel(){
+  drawFlowergrassfeild(100, 200);
+  pausebutton();
+}
+

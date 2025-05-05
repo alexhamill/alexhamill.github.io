@@ -1,8 +1,8 @@
 // canvas
 const canvas = document.getElementById("gamecanvas");
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = window.innerWidth * .99;
+canvas.height = window.innerHeight * .99;
 
 // variables and objects
 const fps ={
@@ -23,12 +23,13 @@ const fpsset={
 const player = {
     x: 150,
     y: 150,
-    color: "blue",
+    color: "lightblue",
     speed: 7,
     dx: 0,
     dy: 0,
     score: 0,
     radius: 50,
+    stroke: "black",
 }
 const presets = {
     arrowspeed: (chargeTime) => {
@@ -41,6 +42,7 @@ const presets = {
     enemiespeed: (lifetime) => {
         return 3 * Math.floor((Math.sin(lifetime)+2));
     },
+    enemycolor: "#e5694e",
 };
 const keys = {}
 const bow = {
@@ -61,15 +63,19 @@ const game = {
 const arrows = [];
 const enemies = [];
 // draw functions
-function circle(x,y,r,color){
+function circle(x,y,r,color,stroke){
     ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = stroke;
     ctx.arc(x,y,r,0,2*Math.PI);
     ctx.fillStyle = color;
     ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
 }
 
-drawplayer = function(x,y,r,color){
-    circle(x,y,r,color);
+drawplayer = function(x,y,r,color,stroke){
+    circle(x,y,r,color,stroke);
 }
 
 function drawbow(x,y){
@@ -106,7 +112,6 @@ function drawarrow(x,y,angle){
     ctx.moveTo(-15-offset, 0);
     ctx.lineTo(-23-offset, -10);
     ctx.lineTo(-23-offset, 10);
-    
     ctx.moveTo(-20-offset, 0);
     ctx.lineTo(-28-offset, -10);
     ctx.lineTo(-28-offset, 10);
@@ -119,12 +124,45 @@ function drawarrow(x,y,angle){
 function scoreboard(){
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Score: " + player.score, 10, 50);
+    ctx.textAlign = "left"; // Ensure text alignment is reset
+    ctx.fillText("Score: " + player.score, 100, 50);
 }
 
 function drawenemy(x, y, color, width){ 
     ctx.fillStyle = color;
-    ctx.fillRect(x, y, width, width);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    const radius = 10;
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + width - radius);
+    ctx.quadraticCurveTo(x + width, y + width, x + width - radius, y + width);
+    ctx.lineTo(x + radius, y + width);
+    ctx.quadraticCurveTo(x, y + width, x, y + width - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    
+}
+
+function drawpause(){
+    ctx.font = "50px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Paused", canvas.width / 2 - 100, canvas.height / 2);
+    ctx.fillText("Press P to continue", canvas.width / 2 - 200, canvas.height / 2 + 50);
+}
+
+function drawdied(){
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+    ctx.fillText("Game Over", canvas.width / 2, 100);
+    ctx.fillText("Score: " + player.score, canvas.width / 2, 150);
+    ctx.fillText("Press R to Restart", canvas.width / 2, 200);
 }
 
 function drawenemys(){
@@ -136,57 +174,41 @@ function drawenemys(){
         makeenemy();
     }
 }
-function fpscheck(){
-    fps.then = fps.now || Date.now();
-    fps.now = Date.now();
-    fps.elapsed = fps.now - fps.then;
-    fps.fps = Math.round(1000 / fps.elapsed);
-    console.log("fps:", fps.fps);
-}
-function fpslimiter(){
-    fpsset.now = Date.now();
-    fpsset.elapsed = fpsset.now - fpsset.then;
-    if (fpsset.elapsed > fpsset.interval) {
-        fpsset.then = fpsset.now - (fpsset.elapsed % fpsset.interval);
-        return true;
-    } else {
-        return false;
-    }
-}
+
 
 // main loop
 function animate() {
     // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
     if (fpslimiter()) {
-    fpscheck();
-
+    // fpscheck();
+    
     // I need to remember to keep the clear rect at the top
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (game.state === "playing") {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // pre-rendering math should probably be here
+        move();
+        movearrows();
+        allcolisions();
+        moveenemies();
 
-    // pre-rendering math should probably be here
-    move();
-    movearrows();
-    allcolisions();
-    moveenemies();
+        // draw
+        drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
+        drawbow(player.x, player.y);
+        scoreboard();
+        fire();
+        drawenemys();
+        
+        // player movement
+        player.x += player.dx;
+        player.y += player.dy;
+        }
 
-    // draw
-    drawplayer(player.x, player.y, player.radius, player.color);
-    drawbow(player.x, player.y);
-    scoreboard();
-    fire();
-    drawenemys();
-
-    // player movement
-    player.x += player.dx;
-    player.y += player.dy;
-
-    // for now the game stops rendering when it ends
-    if (game.state === "died") {
-        ctx.font = "50px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText("Game Over", canvas.width / 2 - 190, 100);
-        ctx.fillText("Score: " + player.score, canvas.width / 2 - 150, 200);
-        return;
+        if (game.state === "paused") {
+            drawpause();
+        }
+        // for now the game stops rendering when it ends
+        if (game.state === "died") {
+            drawdied();
     }
 }
 
@@ -206,6 +228,24 @@ function fire(){
             bow.firing = false;
             bow.frame = 0;
         }
+    }
+}
+
+function fpscheck(){
+    fps.then = fps.now || Date.now();
+    fps.now = Date.now();
+    fps.elapsed = fps.now - fps.then;
+    fps.fps = Math.round(1000 / fps.elapsed);
+    console.log("fps:", fps.fps);
+}
+function fpslimiter(){
+    fpsset.now = Date.now();
+    fpsset.elapsed = fpsset.now - fpsset.then;
+    if (fpsset.elapsed > fpsset.interval) {
+        fpsset.then = fpsset.now - (fpsset.elapsed % fpsset.interval);
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -238,7 +278,20 @@ function move(){
     } else {
         player.dx = 0;
     }
+    if (player.x > window.innerWidth) {
+        player.x = window.innerWidth;
+    }    
+    if (player.x < 0) {
+        player.x = 0;
+    }
+    if (player.y > window.innerHeight) {
+        player.y= window.innerHeight;
+    }
+    if (player.y < 0) {
+        player.y = 0;
+    }
 }
+
 
 function mousemove(e){
     const mouseX = e.clientX;
@@ -250,7 +303,7 @@ function makeenemy(){
     enemies.push({
         x: Math.random() * (window.innerWidth-100),
         y: Math.random() * (window.innerHeight-100),
-        color: "red",
+        color: presets.enemycolor,
         lifetime: 0,
         speed: (x) => presets.enemiespeed(x),
         width: 50,
@@ -286,6 +339,16 @@ function moveenemy(enemy){
     }
 }
 
+function resetgame(){
+    game.state = "playing";
+    player.x = 150;
+    player.y = 150;
+    player.dx = 0;
+    player.dy = 0;
+    player.score = 0;
+    enemies.length = 0;
+    arrows.length = 0;
+}
 
 // collision detection
 function allcolisions(){
@@ -330,6 +393,11 @@ function listen(){
 }
 
 function mousedown(e){
+    if(e.clientX > background.width - 35 && e.clientY < 40){
+        console.log("pause");
+        game.state === "paused" ? game.state = "playing" : game.state = "paused";
+        return;
+    }
     if(bow.firing) return;
     bow.charging = true;
 }
@@ -352,14 +420,21 @@ function mouseup(e){
 }
 
 function keydown(e){
-    keys[e.key] = true; 
+    keys[e.key.toLowerCase()] = true; 
     if(e.key == " " || e.key == "q"){
         mousedown(e);
+    }
+    if(e.key === "p"){
+        game.state === "paused" ? game.state = "playing" : game.state = "paused";
+    }
+    if(e.key === "r" && game.state === "died"){
+        console.log("restart");
+        resetgame();
     }
 }
 
 function keyup(e){
-    keys[e.key] = false;
+    keys[e.key.toLowerCase()] = false;
     if(e.key == " " || e.key == "q"){
         mouseup(e); 
     }
@@ -369,5 +444,5 @@ function keyup(e){
 
 // running the functions
 listen();
-drawFlowergrassfeild(100, 200);
+drawlevel();
 animate();
