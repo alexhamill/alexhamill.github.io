@@ -158,7 +158,8 @@ function fpslimiter(){
 function animate() {
     // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
     if (fpslimiter()) {
-    fpscheck();
+        
+    // fpscheck();
 
     // I need to remember to keep the clear rect at the top
     ctx.clearRect(0, 0, canvas.width, canvas.height);
