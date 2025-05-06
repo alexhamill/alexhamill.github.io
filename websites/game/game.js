@@ -31,6 +31,13 @@ const player = {
     radius: 50,
     stroke: "black",
 }
+const levels = {
+    level1: {
+        name: "level1",
+        enemies: 5,
+        helth: 100,
+    },
+}
 const presets = {
     arrowspeed: (chargeTime) => {
         let speed = Math.sqrt(chargeTime * 5 ) * 1
