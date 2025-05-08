@@ -1,7 +1,7 @@
 const upgradecanvas = document.getElementById("upgradecanvas");
 const upgradectx = upgradecanvas.getContext("2d");
-canvas.width = window.innerWidth * .99;
-canvas.height = window.innerHeight * .99; 
+upgradecanvas.width = window.innerWidth * .99;
+upgradecanvas.height = window.innerHeight * .99; 
 
 const nodes = [
     {
@@ -9,7 +9,7 @@ const nodes = [
         y: 0,
         width: 100,
         height: 100,
-        color: "#FF69B4",
+        color: "black",
         id: 1,
         owned: false,
         parent: null,
@@ -19,20 +19,20 @@ const nodes = [
     },
     {
         x: 200,
-        y: 200,
+        y: 0,
         width: 100,
         height: 100,
-        color: "#FF1493",
+        color: "black",
         id: 2,
         owned: false,
-        parent: null,
+        parent: 1,
         onclick: function() {
             console.log("Node clicked!");
         }
     }
 ];
 
-function createNode(x, y, width, height, color, id, owned, parent)  {
+function createNode(x, y, width, height, color, id, owned, parent)  { // im not going to use this
     nodes.push({
         x: x,
         y: y,
@@ -49,13 +49,25 @@ function createNode(x, y, width, height, color, id, owned, parent)  {
 }
 
 function drawNode(node) {
+    console.log(node);
     upgradectx.fillStyle = node.color;
     upgradectx.fillRect(node.x, node.y, node.width, node.height);
+    if(node.parent !== null) {
+    parent = nodes.find(n => n.id === node.parent);
     upgradectx.beginPath();
-    upgradectx.moveTo(node.x + width/2, node.y + height/2);
-    upgradectx.lineTo(node.x + node.width, node.y);
-    upgradectx.lineTo(node.x + node.width, node.y + node.height);
-    upgradectx.lineTo(node.x, node.y + node.height);
-    upgradectx.closePath();
-    upgradectx.fill();
+    strokeStyle = "black";
+    upgradectx.lineWidth = 30;
+    console.log(parent);    
+    upgradectx.moveTo(node.x + node.width / 2, node.y + node.height / 2);
+    upgradectx.lineTo(parent.x + parent.width / 2, parent.y + parent.height / 2);
+    upgradectx.stroke();
+    }
 }
+
+function drawtree(){
+    nodes.forEach(node => {
+        drawNode(node);
+    });
+}
+
+drawtree();
