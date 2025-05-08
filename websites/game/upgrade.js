@@ -70,4 +70,4 @@ function drawtree(){
     });
 }
 
-drawtree();
+// drawtree();

@@ -33,6 +33,7 @@ const player = {
     radius: 50,
     stroke: "black",
     level: 1,
+    damage: 1,
 }
 
 const levels = {
@@ -51,6 +52,9 @@ const presets = {
             }
             return speed;
         },
+        damage: (chargeTime) => {
+            return player.damage + (chargeTime+1)/30;
+        }
     },
 
     opps:{
@@ -59,6 +63,7 @@ const presets = {
                 return 3 * Math.floor((Math.sin(lifetime)+2));
             },
             enemycolor: "#e5694e",
+            health: 1,
         },
 
     },
@@ -83,6 +88,7 @@ const opps = {
     enemies : [],
 }
 const arrows = [];
+const coins = [];
 
 // draw functions
 function circle(x,y,r,color,stroke){
@@ -192,51 +198,11 @@ function drawenemys(){
         drawenemy(enemy.x, enemy.y,enemy.color,enemy.width);
         enemy.lifetime++;
     });
-    if(opps.enemies.length < 2){
+    if(opps.enemies.length < 3){
         makeenemy();
     }
 }
 
-
-// main loop
-function animate() {
-    // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
-    if (fpslimiter()) {
-    // fpscheck();
-    
-
-    // I need to remember to keep the clear rect at the top
-    if (game.state === "playing") {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // pre-rendering math should probably be here
-        move();
-        movearrows();
-        allcolisions();
-        moveenemies();
-
-        // draw
-        drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
-        drawbow(player.x, player.y);
-        scoreboard();
-        fire();
-        drawenemys();
-        
-        // player movement
-        player.x += player.dx;
-        player.y += player.dy;
-        }
-
-        if (game.state === "paused") {
-            drawpause();
-        }
-        // for now the game stops rendering when it ends
-        if (game.state === "died") {
-            drawdied();
-    }
-}
-
-requestAnimationFrame(animate);
-}
 
 // math functions
 function fire(){
@@ -330,6 +296,7 @@ function makeenemy(){
         lifetime: 0,
         speed: (x) => presets.opps.enemies.enemiespeed(x),
         width: 50,
+        health: presets.opps.enemies.health,
         target: {
             x: Math.random() * (window.innerWidth-100),
             y: Math.random() * (window.innerHeight-100),
@@ -382,9 +349,17 @@ function allcolisions(){
         }
         opps.enemies.forEach(enemy => {
             if(colisionsquare(arrow, enemy)){
-                player.score++;
                 arrows.splice(arrows.indexOf(arrow), 1);
+                enemy.health -= arrow.damage;
+                ctx.fillStyle = "red";
+                ctx.globalAlpha = 0.5;
+                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.width);
+                enemy.color = "red";
+                ctx.globalAlpha = 1;
+                if(enemy.health <= 0){
+                player.score++;
                 opps.enemies.splice(opps.enemies.indexOf(enemy), 1);
+                }
             }
         });
     });
@@ -439,6 +414,7 @@ function mouseup(e){
         dx: Math.cos(bow.Angle) * presets.arrows.arrowspeed(bow.chargetime),
         dy: Math.sin(bow.Angle) * presets.arrows.arrowspeed(bow.chargetime),
         angle: bow.Angle,
+        damage: presets.arrows.damage(bow.chargetime),
     });
     bow.chargetime = 0;
     bow.radius = 100;
@@ -467,7 +443,45 @@ function keyup(e){
     }
 }
 
+// main loop
+function animate() {
+    // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
+    if (fpslimiter()) {
+    // fpscheck();
+    
 
+    // I need to remember to keep the clear rect at the top
+    if (game.state === "playing") {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // pre-rendering math should probably be here
+        move();
+        movearrows();
+        allcolisions();
+        moveenemies();
+
+        // draw
+        drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
+        drawbow(player.x, player.y);
+        scoreboard();
+        fire();
+        drawenemys();
+        
+        // player movement
+        player.x += player.dx;
+        player.y += player.dy;
+        }
+
+        if (game.state === "paused") {
+            drawpause();
+        }
+        // for now the game stops rendering when it ends
+        if (game.state === "died") {
+            drawdied();
+    }
+}
+
+requestAnimationFrame(animate);
+}
 
 // running the functions
 listen();
