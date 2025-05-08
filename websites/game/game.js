@@ -13,6 +13,7 @@ const fps ={
     elapsed : 0,
     fps : 0,
 }
+
 const fpsset={
     now : 0,
     then : Date.now(),
@@ -20,6 +21,7 @@ const fpsset={
     elapsed : 0,
 
 }
+
 const player = {
     x: 150,
     y: 150,
@@ -30,26 +32,36 @@ const player = {
     score: 0,
     radius: 50,
     stroke: "black",
+    level: 1,
 }
+
 const levels = {
     level1: {
         name: "level1",
         enemies: 5,
-        helth: 100,
     },
 }
+
 const presets = {
-    arrowspeed: (chargeTime) => {
-        let speed = Math.sqrt(chargeTime * 5 ) * 1
-        if (speed < .5){
-            speed = 1;
-        }
-        return speed;
+    arrows:{
+        arrowspeed: (chargeTime) => {
+            let speed = Math.sqrt(chargeTime * 5 ) * 1
+            if (speed < .5){
+                speed = 1;
+            }
+            return speed;
+        },
     },
-    enemiespeed: (lifetime) => {
-        return 3 * Math.floor((Math.sin(lifetime)+2));
+
+    opps:{
+        enemies:{
+            enemiespeed: (lifetime) => {
+                return 3 * Math.floor((Math.sin(lifetime)+2));
+            },
+            enemycolor: "#e5694e",
+        },
+
     },
-    enemycolor: "#e5694e",
 };
 const keys = {}
 const bow = {
@@ -67,8 +79,11 @@ const bow = {
 const game = { 
     state: "playing",
 }
+const opps = {
+    enemies : [],
+}
 const arrows = [];
-const enemies = [];
+
 // draw functions
 function circle(x,y,r,color,stroke){
     ctx.beginPath();
@@ -173,11 +188,11 @@ function drawdied(){
 }
 
 function drawenemys(){
-    enemies.forEach(enemy => {
+    opps.enemies.forEach(enemy => {
         drawenemy(enemy.x, enemy.y,enemy.color,enemy.width);
         enemy.lifetime++;
     });
-    if(enemies.length < 2){
+    if(opps.enemies.length < 2){
         makeenemy();
     }
 }
@@ -227,8 +242,8 @@ requestAnimationFrame(animate);
 function fire(){
     if(bow.charging){
         bow.chargetime++;
-        bow.radius = 100 + presets.arrowspeed(bow.chargetime)/3;
-        bow.midpoint = 45 - presets.arrowspeed(bow.chargetime)/3;
+        bow.radius = 100 + presets.arrows.arrowspeed(bow.chargetime)/3;
+        bow.midpoint = 45 - presets.arrows.arrowspeed(bow.chargetime)/3;
     }
     if(bow.firing){
         bow.frame++;
@@ -308,12 +323,12 @@ function mousemove(e){
 }
 
 function makeenemy(){
-    enemies.push({
+    opps.enemies.push({
         x: Math.random() * (window.innerWidth-100),
         y: Math.random() * (window.innerHeight-100),
-        color: presets.enemycolor,
+        color: presets.opps.enemies.enemycolor,
         lifetime: 0,
-        speed: (x) => presets.enemiespeed(x),
+        speed: (x) => presets.opps.enemies.enemiespeed(x),
         width: 50,
         target: {
             x: Math.random() * (window.innerWidth-100),
@@ -323,7 +338,7 @@ function makeenemy(){
 }
 
 function moveenemies(){
-    enemies.forEach(enemy => {
+    opps.enemies.forEach(enemy => {
         moveenemy(enemy);
     });
 }
@@ -354,7 +369,7 @@ function resetgame(){
     player.dx = 0;
     player.dy = 0;
     player.score = 0;
-    enemies.length = 0;
+    opps.enemies.length = 0;
     arrows.length = 0;
 }
 
@@ -365,11 +380,11 @@ function allcolisions(){
             game.state = "died";
                 arrows.splice(arrows.indexOf(arrow), 1);
         }
-        enemies.forEach(enemy => {
+        opps.enemies.forEach(enemy => {
             if(colisionsquare(arrow, enemy)){
                 player.score++;
                 arrows.splice(arrows.indexOf(arrow), 1);
-                enemies.splice(enemies.indexOf(enemy), 1);
+                opps.enemies.splice(opps.enemies.indexOf(enemy), 1);
             }
         });
     });
@@ -420,9 +435,9 @@ function mouseup(e){
     arrows.push({
         x: player.x + bow.radius * Math.cos(bow.Angle),
         y: player.y + bow.radius * Math.sin(bow.Angle),
-        speed: presets.arrowspeed(bow.chargetime),
-        dx: Math.cos(bow.Angle) * presets.arrowspeed(bow.chargetime),
-        dy: Math.sin(bow.Angle) * presets.arrowspeed(bow.chargetime),
+        speed: presets.arrows.arrowspeed(bow.chargetime),
+        dx: Math.cos(bow.Angle) * presets.arrows.arrowspeed(bow.chargetime),
+        dy: Math.sin(bow.Angle) * presets.arrows.arrowspeed(bow.chargetime),
         angle: bow.Angle,
     });
     bow.chargetime = 0;
