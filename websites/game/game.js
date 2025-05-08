@@ -290,7 +290,7 @@ function mousemove(e){
 
 function makeenemy(){
     opps.enemies.push({
-        x: Math.random() * (window.innerWidth-100),
+        x: window.innerWidth + 100,
         y: Math.random() * (window.innerHeight-100),
         color: presets.opps.enemies.enemycolor,
         lifetime: 0,
