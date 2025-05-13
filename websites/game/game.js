@@ -34,6 +34,7 @@ const player = {
     stroke: "black",
     level: 1,
     damage: 1,
+    money : 0,
 }
 
 const levels = {
@@ -153,7 +154,8 @@ function scoreboard(){
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.textAlign = "left"; // Ensure text alignment is reset
-    ctx.fillText("Score: " + player.score, 100, 50);
+    ctx.fillText("Score: " + player.score+"  Coins: "+player.money, 100, 50);
+
 }
 
 function drawenemy(x, y, color, width){ 
@@ -352,6 +354,35 @@ function resetgame(){
     player.score = 0;
     opps.enemies.length = 0;
     arrows.length = 0;
+    coins.length =0;
+    player.money = 0;
+}
+
+function movecoin(coin){
+    coin.target.x = player.x - player.radius/2;
+    coin.target.y = player.y + player.radius/2;
+    if(Math.abs(coin.x - coin.target.x) < player.radius && Math.abs(coin.y - coin.target.y) < player.radius){
+        coins.splice(coins.indexOf(coin), 1);
+        player.money++;
+    }
+    if(Math.abs(coin.x-coin.target.x) > coin.radius){
+        const dx = Math.sign(coin.target.x - coin.x) * coin.speed;
+        coin.x += dx;
+    } else {
+        const dx = 0;
+    }
+    if(Math.abs(coin.y-coin.target.y) > coin.radius){
+        const dy = Math.sign(coin.target.y - coin.y) * coin.speed;
+        coin.y += dy;
+    } else {
+        const dy = 0;
+    }
+}
+
+function movecoins(){
+    coins.forEach(coin => {
+        movecoin(coin);
+    });
 }
 
 function makecoin(x,y){
@@ -361,11 +392,11 @@ function makecoin(x,y){
         color:"gold",
         radius: 7,
         stroke: "black",
-        speed: 1,
+        speed: 5,
         lifetime: 0,
         target: {
-            x: Math.random() * (window.innerWidth-100),
-            y: Math.random() * (window.innerHeight-100),
+            x: player.x,
+            y: player.y,
         },
     });
 }
@@ -492,17 +523,17 @@ function keyup(e){
 
 // main loop
 function animate() {
-    // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting bs. idk if it works tbh but i try.
+    // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting. idk if it works tbh but i try.
     if (fpslimiter()) {
-    // fpscheck();
+    fpscheck();
     
-
     // I need to remember to keep the clear rect at the top
     if (game.state === "playing") {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // pre-rendering math should probably be here
         move();
         movearrows();
+        movecoins();
         allcolisions();
         moveenemies();
 
