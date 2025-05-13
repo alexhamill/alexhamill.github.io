@@ -1,0 +1,9 @@
+body{
+    text-align: center;
+    background-color: blanchedalmond;
+}
+
+#gameframe{
+    width: 100%;
+    height: 60vh;
+}

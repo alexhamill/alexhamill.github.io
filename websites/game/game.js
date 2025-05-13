@@ -198,9 +198,18 @@ function drawenemys(){
         drawenemy(enemy.x, enemy.y,enemy.color,enemy.width);
         enemy.lifetime++;
     });
-    if(opps.enemies.length < 3){
+    if(opps.enemies.length < player.score/5+1){
         makeenemy();
     }
+}
+
+function drawcoin(coin){
+    circle(coin.x, coin.y, coin.radius, coin.color, coin.stroke);
+}
+function drawcoins(){
+    coins.forEach(coin => {
+        drawcoin(coin);
+    });
 }
 
 
@@ -312,8 +321,13 @@ function moveenemies(){
 
 function moveenemy(enemy){
     if(Math.abs(enemy.x - enemy.target.x) < enemy.speed(enemy.lifetime) && Math.abs(enemy.y - enemy.target.y) < enemy.speed(enemy.lifetime)){
+        if (Math.random() < 0.2){
+            enemy.target.x = player.x
+            enemy.target.y = player.y;
+        }else{
         enemy.target.x = Math.random() * (canvas.width-100);
         enemy.target.y = Math.random() * (canvas.height-100);//Math.random() * (canvas.height-100);
+        }
     }
     if(Math.abs(enemy.x-enemy.target.x) > enemy.speed(enemy.lifetime)){
         const dx = Math.sign(enemy.target.x - enemy.x) * enemy.speed(enemy.lifetime);
@@ -340,28 +354,51 @@ function resetgame(){
     arrows.length = 0;
 }
 
+function makecoin(x,y){
+    coins.push({
+        x:x,
+        y:y,
+        color:"gold",
+        radius: 7,
+        stroke: "black",
+        speed: 1,
+        lifetime: 0,
+        target: {
+            x: Math.random() * (window.innerWidth-100),
+            y: Math.random() * (window.innerHeight-100),
+        },
+    });
+}
+
 // collision detection
 function allcolisions(){
     arrows.forEach(arrow => {
         if(colisioncircle(arrow, player)){
             game.state = "died";
-                arrows.splice(arrows.indexOf(arrow), 1);
         }
         opps.enemies.forEach(enemy => {
             if(colisionsquare(arrow, enemy)){
                 arrows.splice(arrows.indexOf(arrow), 1);
                 enemy.health -= arrow.damage;
+
                 ctx.fillStyle = "red";
                 ctx.globalAlpha = 0.5;
                 ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.width);
                 enemy.color = "red";
                 ctx.globalAlpha = 1;
+
                 if(enemy.health <= 0){
                 player.score++;
                 opps.enemies.splice(opps.enemies.indexOf(enemy), 1);
+                makecoin(enemy.x, enemy.y);
                 }
             }
         });
+    });
+    opps.enemies.forEach(enemy => {
+        if(squarewithcirclecolisions(player, enemy)){
+            game.state = "died";
+        }
     });
 }
 function colisioncircle(arrow, object){
@@ -379,6 +416,16 @@ function colisionsquare(arrow, object){
     }
     return false;
 }
+function squarewithcirclecolisions(player, enemy) {
+    const dx = player.x - (enemy.x + enemy.width / 2);
+    const dy = player.y - (enemy.y + enemy.width / 2);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < player.radius + enemy.width / 2) {
+        return true;
+    }
+    return false;
+}
+
 
 
 // listiners
@@ -391,7 +438,7 @@ function listen(){
 }
 
 function mousedown(e){
-    if(e.clientX > background.width - 35 && e.clientY < 40){
+    if(e.clientX > background.width - 35 && e.clientY < 40 && (game.state === "playing" || game.state === "paused")){
         console.log("pause");
         game.state === "paused" ? game.state = "playing" : game.state = "paused";
         return;
@@ -427,7 +474,7 @@ function keydown(e){
     if(e.key == " " || e.key == "q"){
         mousedown(e);
     }
-    if(e.key === "p"){
+    if(e.key === "p" && game.state === "playing"){
         game.state === "paused" ? game.state = "playing" : game.state = "paused";
     }
     if(e.key === "r" && game.state === "died"){
@@ -465,6 +512,7 @@ function animate() {
         scoreboard();
         fire();
         drawenemys();
+        drawcoins();
         
         // player movement
         player.x += player.dx;

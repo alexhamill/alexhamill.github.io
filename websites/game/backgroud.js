@@ -1,7 +1,7 @@
 const background = document.getElementById("background");
 const backctx = background.getContext("2d");
-background.width = window.innerWidth * .99;
-background.height = window.innerHeight * .99;
+background.width = window.innerWidth * 1;
+background.height = window.innerHeight * 1;
 const colors = ['#FF69B4', '#FF1493', '#FFB6C1', '#FF69B4','#ff6f6f','#d161f7',"#8a61ff","#61d7ff","#61ff8a","#ff6161","#ff61d7","#d7ff61"];
 
 // random cube grass
