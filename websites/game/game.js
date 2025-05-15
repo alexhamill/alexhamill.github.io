@@ -208,11 +208,22 @@ function drawenemys(){
 function drawcoin(coin){
     circle(coin.x, coin.y, coin.radius, coin.color, coin.stroke);
 }
+
 function drawcoins(){
     coins.forEach(coin => {
         drawcoin(coin);
     });
 }
+
+function drawlupgrade(){
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+    ctx.rect(100, 100, canvas.width-200 , canvas.height-200); 
+    ctx.stroke();
+    ctx.closePath();
+}
+
 
 
 // math functions
@@ -456,6 +467,12 @@ function squarewithcirclecolisions(player, enemy) {
     }
     return false;
 }
+function upgradeclick(x,y){
+    if(x<background.width/2+30 && x>background.width/2-30 && y<40){
+        return true;
+    }
+    return false;
+}
 
 
 
@@ -470,13 +487,16 @@ function listen(){
 
 function mousedown(e){
     if(e.clientX > background.width - 35 && e.clientY < 40 && (game.state === "playing" || game.state === "paused")){
-        console.log("pause");
         game.state === "paused" ? game.state = "playing" : game.state = "paused";
         return;
     }
+    if(upgradeclick(e.clientX,e.clientY) && (game.state === "playing" || game.state === "upgrading")){
+        game.state === "upgrading" ? game.state = "playing" : game.state = "upgrading";
+        return;
+    }
     if (game.state === "playing"){
-    if(bow.firing) return;
-    bow.charging = true;
+        if(bow.firing) return;
+        bow.charging = true;
     }
 }
 
@@ -556,7 +576,10 @@ function animate() {
         // for now the game stops rendering when it ends
         if (game.state === "died") {
             drawdied();
-    }
+        }
+        if (game.state === "upgrading"){
+            drawlupgrade();
+        }
 }
 
 requestAnimationFrame(animate);

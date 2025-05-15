@@ -121,8 +121,48 @@ function pausebutton(){
   backctx.fillRect(background.width - 15, 10, 10, 30);
   backctx.fillRect(background.width - 35, 10, 10, 30);
 }
+
+function upgradebutton(){
+  backctx.beginPath();
+  backctx.moveTo(background.width/2 + 30,  5);
+  backctx.lineTo(background.width/2 - 30, 5);
+  backctx.lineTo(background.width/2,40)
+  backctx.stroke();
+  backctx.closePath();
+  backctx.fill();
+}
+
+function line(){
+  const startX = Math.random() * (background.width-background.width*.95)+background.width*.95;
+  const startY = Math.random() * (background.height);
+  const endY = startY + Math.random() * 50 - 25; // Random length and direction
+  backctx.beginPath();
+  backctx.moveTo(startX, startY);
+  backctx.lineTo(startX, endY);
+  backctx.strokeStyle = "white";
+  backctx.lineWidth = 2;
+  backctx.stroke();
+}
+
+function drawlriver(){
+  backctx.fillStyle = "#039dfc";
+  backctx.fillRect(background.width*.95,0,background.width*.10,background.height);
+  backctx.fillStyle = "#6b3e2e";
+  for (let i = 0; i < 100; i++) {
+    line();
+  }
+  backctx.fillRect(background.width*.93,background.height/2-50,background.width*.7,100);
+  backctx.beginPath();
+  backctx.moveTo(background.width*.97,background.height/2-50);
+  backctx.lineTo(background.width*.97,background.height/2+50);
+  backctx.strokeStyle = "#47291e";
+  backctx.stroke();
+}
+
 function drawlevel(){
   drawFlowergrassfeild(100, 200);
+  drawlriver();
   pausebutton();
+  upgradebutton();
 }
 
