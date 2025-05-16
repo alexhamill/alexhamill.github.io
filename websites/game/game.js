@@ -1,10 +1,10 @@
-// canvas
+// ! canvas
 const canvas = document.getElementById("gamecanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth * .99;
 canvas.height = window.innerHeight * .99;
 
-// variables and objects
+// ! variables and objects
 const fps ={
     now : 0,
     then : Date.now(),
@@ -115,7 +115,9 @@ const upgradebuttons = {
         }
     }
 }
-// draw functions
+
+// ! draw functions
+
 function circle(x, y, r, color, stroke, transparency = 1) {
     ctx.save();
     ctx.globalAlpha = transparency;
@@ -284,7 +286,7 @@ function drawlarmor(){
 
 
 
-// math functions
+// ! math functions
 function fire(){
     if(bow.charging){
         bow.chargetime++;
@@ -478,7 +480,7 @@ function makecoin(x,y){
     });
 }
 
-// collision detection
+// ! collision detection
 function allcolisions(){
     arrows.forEach(arrow => {
         if(colisioncircle(arrow, player)){
@@ -565,7 +567,8 @@ function upgradeclicks(x,y){
 
 
 
-// listiners
+
+// ! listiners
 function listen(){
    document.addEventListener("mousemove", mousemove);
    document.addEventListener("keydown", keydown);
@@ -585,6 +588,7 @@ function mousedown(e){
     }
     if(game.state === "upgrading"){
         upgradeclicks(e.clientX,e.clientY);
+        return;
     }
     if (game.state === "playing"){
         if(bow.firing) return;
@@ -593,7 +597,7 @@ function mousedown(e){
 }
 
 function mouseup(e){
-    if(game.state === "playing"){
+    if(game.state === "playing" && bow.chargetime>0){
     if(bow.firing) return;
     bow.charging = false;
     bow.firing = true;
@@ -617,13 +621,16 @@ function keydown(e){
     if(e.key == " " || e.key == "q"){
         mousedown(e);
     }
-    if(e.key === "p" && game.state === "playing"){
+    if(e.key === "p" && (game.state === "playing" || game.state === "paused")){
         game.state === "paused" ? game.state = "playing" : game.state = "paused";
     }
     if(e.key === "r" && game.state === "died"){
         console.log("restart");
         resetgame();
     }
+    if(e.key === "u" && (game.state === "playing" || game.state === "upgrading")){
+        game.state === "upgrading" ? game.state = "playing" : game.state = "upgrading";
+    } 
 }
 
 function keyup(e){
@@ -633,7 +640,7 @@ function keyup(e){
     }
 }
 
-// main loop
+// ! main loop
 function animate() {
     // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting. idk if it works tbh but i try.
     if (fpslimiter()) {
@@ -642,18 +649,19 @@ function animate() {
     // I need to remember to keep the clear rect at the top
     if (game.state === "playing") {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         // pre-rendering math should probably be here
         move();
         movearrows();
         movecoins();
         allcolisions();
         moveenemies();
+        fire();
 
         // draw
         drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
         drawbow(player.x, player.y);
         scoreboard();
-        fire();
         drawenemys();
         drawcoins();
         drawlarmor();
@@ -671,6 +679,13 @@ function animate() {
             drawdied();
         }
         if (game.state === "upgrading"){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
+            drawbow(player.x, player.y);
+            scoreboard();
+            drawenemys();
+            drawcoins();
+            drawlarmor();
             drawlupgrade();
         }
 }
@@ -678,7 +693,7 @@ function animate() {
 requestAnimationFrame(animate);
 }
 
-// running the functions
+// ! running the functions
 listen();
 drawlevel();
 animate();
