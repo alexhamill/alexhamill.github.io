@@ -34,7 +34,8 @@ const player = {
     stroke: "black",
     level: 1,
     damage: 1,
-    money : 0,
+    money : 10,
+    armor: false,
 }
 
 const levels = {
@@ -91,16 +92,42 @@ const opps = {
 const arrows = [];
 const coins = [];
 
+const upgradebuttons = {
+    armor:{
+        x: 110,
+        y: 110,
+        width: 120,
+        height: 100,
+        text: "armor",
+        owned: false,
+        color: "yellow",
+        cost: 10,
+        onclick: ()=>{
+                console.log("clickerd");
+                upgradebuttons.armor.owned = true;
+                upgradebuttons.armor.color = "grey";
+                player.armor = true;
+        },
+        remove: ()=>{
+            upgradebuttons.armor.owned = false;
+            upgradebuttons.armor.color = "yellow";
+            player.armor = false;
+        }
+    }
+}
 // draw functions
-function circle(x,y,r,color,stroke){
+function circle(x, y, r, color, stroke, transparency = 1) {
+    ctx.save();
+    ctx.globalAlpha = transparency;
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = stroke;
-    ctx.arc(x,y,r,0,2*Math.PI);
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = color;
     ctx.fill();
     ctx.stroke();
     ctx.closePath();
+    ctx.restore();
 }
 
 drawplayer = function(x,y,r,color,stroke){
@@ -215,13 +242,44 @@ function drawcoins(){
     });
 }
 
+function squareoutline(x,y,w,h){
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+    ctx.rect(x, y, w , h); 
+    ctx.stroke();
+    ctx.closePath();
+}
+
 function drawlupgrade(){
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = "black";
+    ctx.fillStyle = "white";
+    ctx.fillRect(100, 100, canvas.width-200 , canvas.height-200); 
     ctx.rect(100, 100, canvas.width-200 , canvas.height-200); 
     ctx.stroke();
     ctx.closePath();
+    Object.keys(upgradebuttons).forEach(key => {
+        const element = upgradebuttons[key];
+        ctx.fillStyle = element.color;
+        ctx.fillRect(element.x,element.y,element.width,element.height);
+        squareoutline(element.x,element.y,element.width,element.height);
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        const lines = [element.text, "owned: " + element.owned];
+        lines.forEach((line, index) => {
+            ctx.fillText(line, element.x + element.width / 2, element.y + element.height / 2 - 7 + index * 20);
+        });
+
+    });
+}
+
+function drawlarmor(){
+    if(player.armor){
+    circle(player.x,player.y,player.radius+10,"blue","black",.3);
+}
 }
 
 
@@ -300,6 +358,14 @@ function move(){
     }
     if (player.y < 0) {
         player.y = 0;
+    }
+}
+
+function onhitplayer(){
+    if (player.armor){
+        upgradebuttons.armor.remove();
+    } else {
+    game.state = "died"
     }
 }
 
@@ -416,7 +482,8 @@ function makecoin(x,y){
 function allcolisions(){
     arrows.forEach(arrow => {
         if(colisioncircle(arrow, player)){
-            game.state = "died";
+            arrows.splice(arrows.indexOf(arrow), 1);
+            onhitplayer();
         }
         opps.enemies.forEach(enemy => {
             if(colisionsquare(arrow, enemy)){
@@ -439,10 +506,12 @@ function allcolisions(){
     });
     opps.enemies.forEach(enemy => {
         if(squarewithcirclecolisions(player, enemy)){
-            game.state = "died";
+            opps.enemies.splice(opps.enemies.indexOf(enemy),1)
+            onhitplayer();
         }
     });
 }
+
 function colisioncircle(arrow, object){
     const dx = arrow.x - object.x;
     const dy = arrow.y - object.y;
@@ -452,12 +521,14 @@ function colisioncircle(arrow, object){
     }
     return false;
 }
+
 function colisionsquare(arrow, object){
     if (arrow.x > object.x && arrow.x < object.x + object.width && arrow.y > object.y && arrow.y < object.y + object.width) {
         return true;
     }
     return false;
 }
+
 function squarewithcirclecolisions(player, enemy) {
     const dx = player.x - (enemy.x + enemy.width / 2);
     const dy = player.y - (enemy.y + enemy.width / 2);
@@ -467,11 +538,29 @@ function squarewithcirclecolisions(player, enemy) {
     }
     return false;
 }
+
 function upgradeclick(x,y){
     if(x<background.width/2+30 && x>background.width/2-30 && y<40){
         return true;
     }
     return false;
+}
+
+function Clicksquare(x,y,object){
+    if(x > object.x && x < object.x + object.width && y > object.y && y < object.y + object.height){
+     return true;
+    }
+    return false;
+}
+
+function upgradeclicks(x,y){
+    Object.keys(upgradebuttons).forEach(key => {
+        const element = upgradebuttons[key];
+        if( Clicksquare(x,y,element) && player.money >= element.cost){
+            player.money -= element.cost;
+            element.onclick();
+        }
+    });
 }
 
 
@@ -493,6 +582,9 @@ function mousedown(e){
     if(upgradeclick(e.clientX,e.clientY) && (game.state === "playing" || game.state === "upgrading")){
         game.state === "upgrading" ? game.state = "playing" : game.state = "upgrading";
         return;
+    }
+    if(game.state === "upgrading"){
+        upgradeclicks(e.clientX,e.clientY);
     }
     if (game.state === "playing"){
         if(bow.firing) return;
@@ -545,7 +637,7 @@ function keyup(e){
 function animate() {
     // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting. idk if it works tbh but i try.
     if (fpslimiter()) {
-    fpscheck();
+    // fpscheck();
     
     // I need to remember to keep the clear rect at the top
     if (game.state === "playing") {
@@ -564,6 +656,7 @@ function animate() {
         fire();
         drawenemys();
         drawcoins();
+        drawlarmor();
         
         // player movement
         player.x += player.dx;
