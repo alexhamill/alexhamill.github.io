@@ -12,7 +12,7 @@ const fps ={
     start : 0,
     elapsed : 0,
     fps : 0,
-}
+};
 
 const fpsset={
     now : 0,
@@ -20,7 +20,7 @@ const fpsset={
     interval : 1000/60, // put 1000/fps you want slower fps means slower game
     elapsed : 0,
 
-}
+};
 
 const player = {
     x: 150,
@@ -34,9 +34,9 @@ const player = {
     stroke: "black",
     level: 1,
     damage: 1,
-    money : 10,
+    money : 100000,
     armor: false,
-}
+};
 
 const levels = {
     level1: {
@@ -69,8 +69,20 @@ const presets = {
         },
 
     },
+    turrets:{
+       setangle:(turret,target)=>{
+        if (target) {
+            const dx = target.x - (turret.x + turret.w / 2);
+            const dy = target.y - (turret.y + turret.w / 2);
+            turret.angle = Math.atan2(dy, dx);
+        }
+    },
+    cooldown:180,
+}
 };
-const keys = {}
+
+const keys = {};
+
 const bow = {
     Angle: Math.PI/2,
     firing: false,
@@ -81,16 +93,20 @@ const bow = {
     chargetime: 0,
     radius: 100,
     midpoint: 45,
-}
+};
 
 const game = { 
     state: "playing",
-}
+};
+
 const opps = {
     enemies : [],
-}
+};
+
 const arrows = [];
 const coins = [];
+const turrets = [];
+const darts = [];
 
 const upgradebuttons = {
     armor:{
@@ -100,18 +116,36 @@ const upgradebuttons = {
         height: 100,
         text: "armor",
         owned: false,
+        lockedcolor: "grey",
         color: "yellow",
         cost: 10,
         onclick: ()=>{
-                console.log("clickerd");
                 upgradebuttons.armor.owned = true;
-                upgradebuttons.armor.color = "grey";
+                upgradebuttons.armor.color = upgradebuttons.armor.lockedcolor;
                 player.armor = true;
         },
         remove: ()=>{
             upgradebuttons.armor.owned = false;
             upgradebuttons.armor.color = "yellow";
             player.armor = false;
+        }
+        },
+    turret:{
+        x: 250,
+        y: 110,
+        width: 120,
+        height: 100,
+        text: "turret",
+        owned: 0,
+        lockedcolor: "grey",
+        color: "yellow",
+        cost: 100,
+        onclick: ()=> {
+            upgradebuttons.turret.owned += 1;
+            const turretX = Math.random() * (canvas.width - 100) + 50; 
+            const turretY = Math.random() * (canvas.height - 100) + 50;
+            const turretSize = 50;
+            maketurret(turretX, turretY, turretSize);
         }
     }
 }
@@ -284,6 +318,34 @@ function drawlarmor(){
 }
 }
 
+function drawturret(x,y,w,angle){
+    ctx.fillRect(x,y,w,w);
+    circle(x+w/2,x+w/2);
+    ctx.fillStyle = "brown";
+    ctx.fillRect(x, y, w, w);
+    circle(x + w / 2, y + w / 2, w / 3, "grey", "black");
+    ctx.save();
+    ctx.translate(x + w / 2, y + w / 2);
+    ctx.rotate(angle);
+    ctx.fillStyle = "darkgray";
+    ctx.fillRect(0, -w / 8, w/1.5, w / 4);
+    ctx.restore();
+}
+
+function drawturrets(){
+    turrets.forEach(turret => {
+    drawturret(turret.x, turret.y, turret.w, turret.angle);
+});
+}
+
+function drawdart(x,y){
+    circle(x,y,5,"grey","black");
+}
+function drawdarts(){
+    darts.forEach(dart => {
+        drawdart(dart.x,dart.y);
+    });
+}
 
 
 // ! math functions
@@ -334,6 +396,19 @@ function movearrows(){
     });
 }
 
+function movedarts(){
+    darts.forEach(arrow => {
+        arrow.x += arrow.dx;
+        arrow.y += arrow.dy;
+        if (arrow.x > window.innerWidth || arrow.x < 0) {
+            darts.splice(darts.indexOf(arrow),1);
+        }
+        if (arrow.y > window.innerHeight || arrow.y < 0) {
+            darts.splice(darts.indexOf(arrow),1);
+        }
+    });
+}
+
 function move(){
     if(keys["w"]){
         player.dy = -player.speed;
@@ -368,6 +443,21 @@ function onhitplayer(){
         upgradebuttons.armor.remove();
     } else {
     game.state = "died"
+    }
+}
+
+function onhitenemy(prodj,enemy,prodjarray){
+        prodjarray.splice(prodjarray.indexOf(prodj), 1);
+        enemy.health -= prodj.damage;
+        ctx.fillStyle = "red";
+        ctx.globalAlpha = 0.5;
+        ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.width);
+        enemy.color = "red";
+        ctx.globalAlpha = 1;
+        if(enemy.health <= 0){
+        player.score++;
+        opps.enemies.splice(opps.enemies.indexOf(enemy), 1);
+        makecoin(enemy.x, enemy.y);
     }
 }
 
@@ -435,6 +525,9 @@ function resetgame(){
     arrows.length = 0;
     coins.length =0;
     player.money = 0;
+    darts.length = 0;
+    turrets.length = 0;
+    upgradebuttons.turret.owned = 0;
 }
 
 function movecoin(coin){
@@ -480,7 +573,54 @@ function makecoin(x,y){
     });
 }
 
+function maketurret(x,y,w){
+    turrets.push({
+        x:x,
+        y:y,
+        w:w,
+        cooldown:180,
+        maxcooldown:presets.turrets.cooldown,
+        target: null,
+        angle: 0,
+        shootspeed: 7,
+        setangle: (turret,target)=>{
+            presets.turrets.setangle(turret,target);
+        }
+        })
+    };
+
+function targetturets(){
+    turrets.forEach(turret => {
+
+    if (turret.cooldown <= 0) {
+        const target = opps.enemies.find(enemy => {
+            const dx = enemy.x - (turret.x + turret.w / 2);
+            const dy = enemy.y - (turret.y + turret.w / 2);
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            return distance;
+        });
+
+        if (target) {
+            turret.setangle(turret, target);
+            darts.push({
+                x: turret.x + turret.w / 2,
+                y: turret.y + turret.w / 2,
+                speed: turret.shootspeed,
+                dx: Math.cos(turret.angle) * 10,
+                dy: Math.sin(turret.angle) * 10,
+                angle: turret.angle,
+                damage: 2,
+            });
+            turret.cooldown = turret.maxcooldown;
+        }
+    } else {
+        turret.cooldown--;
+    }
+});
+}
+
 // ! collision detection
+
 function allcolisions(){
     arrows.forEach(arrow => {
         if(colisioncircle(arrow, player)){
@@ -489,20 +629,7 @@ function allcolisions(){
         }
         opps.enemies.forEach(enemy => {
             if(colisionsquare(arrow, enemy)){
-                arrows.splice(arrows.indexOf(arrow), 1);
-                enemy.health -= arrow.damage;
-
-                ctx.fillStyle = "red";
-                ctx.globalAlpha = 0.5;
-                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.width);
-                enemy.color = "red";
-                ctx.globalAlpha = 1;
-
-                if(enemy.health <= 0){
-                player.score++;
-                opps.enemies.splice(opps.enemies.indexOf(enemy), 1);
-                makecoin(enemy.x, enemy.y);
-                }
+                onhitenemy(arrow,enemy,arrows);
             }
         });
     });
@@ -511,6 +638,11 @@ function allcolisions(){
             opps.enemies.splice(opps.enemies.indexOf(enemy),1)
             onhitplayer();
         }
+        darts.forEach(dart =>{
+            if (colisioncircle(dart,enemy)){
+                onhitenemy(dart,enemy,darts);
+            }
+    })
     });
 }
 
@@ -518,7 +650,7 @@ function colisioncircle(arrow, object){
     const dx = arrow.x - object.x;
     const dy = arrow.y - object.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < object.radius) {
+    if (distance < object.radius || distance < object.width) {
         return true;
     }
     return false;
@@ -625,7 +757,6 @@ function keydown(e){
         game.state === "paused" ? game.state = "playing" : game.state = "paused";
     }
     if(e.key === "r" && game.state === "died"){
-        console.log("restart");
         resetgame();
     }
     if(e.key === "u" && (game.state === "playing" || game.state === "upgrading")){
@@ -641,6 +772,7 @@ function keyup(e){
 }
 
 // ! main loop
+
 function animate() {
     // requestAnimationFrame(animate); acutally runs at what ever speed it wants so... fps setting. idk if it works tbh but i try.
     if (fpslimiter()) {
@@ -657,7 +789,8 @@ function animate() {
         allcolisions();
         moveenemies();
         fire();
-
+        targetturets();
+        movedarts();
         // draw
         drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
         drawbow(player.x, player.y);
@@ -665,7 +798,9 @@ function animate() {
         drawenemys();
         drawcoins();
         drawlarmor();
-        
+        drawturrets();
+        drawdarts();
+
         // player movement
         player.x += player.dx;
         player.y += player.dy;
@@ -694,6 +829,7 @@ requestAnimationFrame(animate);
 }
 
 // ! running the functions
+
 listen();
 drawlevel();
 animate();
