@@ -120,9 +120,12 @@ const upgradebuttons = {
         color: "yellow",
         cost: 10,
         onclick: ()=>{
+            if(player.money >= upgradebuttons.armor.cost && !upgradebuttons.armor.owned){
+                player.money -= upgradebuttons.armor.cost
                 upgradebuttons.armor.owned = true;
                 upgradebuttons.armor.color = upgradebuttons.armor.lockedcolor;
                 player.armor = true;
+            }
         },
         remove: ()=>{
             upgradebuttons.armor.owned = false;
@@ -141,11 +144,14 @@ const upgradebuttons = {
         color: "yellow",
         cost: 100,
         onclick: ()=> {
-            upgradebuttons.turret.owned += 1;
-            const turretX = Math.random() * (canvas.width - 100) + 50; 
-            const turretY = Math.random() * (canvas.height - 100) + 50;
-            const turretSize = 50;
-            maketurret(turretX, turretY, turretSize);
+            if (player.money >= upgradebuttons.turret.cost) {
+                player.money -= upgradebuttons.turret.cost;
+                upgradebuttons.turret.owned += 1;
+                const turretX = Math.random() * (canvas.width - 100) + 50; 
+                const turretY = Math.random() * (canvas.height - 100) + 50;
+                const turretSize = 50;
+                maketurret(turretX, turretY, turretSize);
+            }
         }
     }
 }
@@ -304,7 +310,7 @@ function drawlupgrade(){
         ctx.font = "20px Arial";
         ctx.fillStyle = "black";
         ctx.textAlign = "center";
-        const lines = [element.text, "owned: " + element.owned];
+        const lines = [element.text, "owned: " + element.owned, "cost: " + element.cost];
         lines.forEach((line, index) => {
             ctx.fillText(line, element.x + element.width / 2, element.y + element.height / 2 - 7 + index * 20);
         });
@@ -578,7 +584,7 @@ function maketurret(x,y,w){
         x:x,
         y:y,
         w:w,
-        cooldown:180,
+        cooldown:180+Math.random()*180,
         maxcooldown:presets.turrets.cooldown,
         target: null,
         angle: 0,
@@ -690,8 +696,7 @@ function Clicksquare(x,y,object){
 function upgradeclicks(x,y){
     Object.keys(upgradebuttons).forEach(key => {
         const element = upgradebuttons[key];
-        if( Clicksquare(x,y,element) && player.money >= element.cost){
-            player.money -= element.cost;
+        if( Clicksquare(x,y,element)){
             element.onclick();
         }
     });
@@ -794,7 +799,6 @@ function animate() {
         // draw
         drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
         drawbow(player.x, player.y);
-        scoreboard();
         drawenemys();
         drawcoins();
         drawlarmor();
@@ -817,12 +821,12 @@ function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawplayer(player.x, player.y, player.radius, player.color,player.stroke);
             drawbow(player.x, player.y);
-            scoreboard();
             drawenemys();
             drawcoins();
             drawlarmor();
             drawlupgrade();
         }
+        scoreboard();
 }
 
 requestAnimationFrame(animate);
