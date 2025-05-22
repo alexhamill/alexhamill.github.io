@@ -34,7 +34,7 @@ const player = {
     stroke: "black",
     level: 1,
     damage: 1,
-    money : 100000,
+    money : 0,
     armor: false,
 };
 
