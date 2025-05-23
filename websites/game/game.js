@@ -1,3 +1,5 @@
+// ! I used an extension that makes comment ancors thats why all of my comments have ! in front of them
+
 // ! canvas
 const canvas = document.getElementById("gamecanvas");
 const ctx = canvas.getContext("2d");
@@ -17,7 +19,7 @@ const fps ={
 const fpsset={
     now : 0,
     then : Date.now(),
-    interval : 1000/60, // put 1000/fps you want slower fps means slower game
+    interval : 1000/60, // put 1000/fps you want. slower fps means slower game.
     elapsed : 0,
 
 };
@@ -222,7 +224,7 @@ function drawarrow(x,y,angle){
 function scoreboard(){
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
-    ctx.textAlign = "left"; // Ensure text alignment is reset
+    ctx.textAlign = "left";
     ctx.fillText("Score: " + player.score+"  Coins: "+player.money, 100, 50);
 
 }
@@ -503,7 +505,7 @@ function moveenemy(enemy){
             enemy.target.y = player.y;
         }else{
         enemy.target.x = Math.random() * (canvas.width-100);
-        enemy.target.y = Math.random() * (canvas.height-100);//Math.random() * (canvas.height-100);
+        enemy.target.y = Math.random() * (canvas.height-100);
         }
     }
     if(Math.abs(enemy.x-enemy.target.x) > enemy.speed(enemy.lifetime)){
