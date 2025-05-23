@@ -1,0 +1,92 @@
+body, .test{
+    background-size:initial;
+    background-color: cadetblue;
+    background-image: radial-gradient(circle, transparent 0%, transparent 20%, black 100%);
+}
+.test{
+    height: 100px;
+    width: 100px;
+    left: calc(50% - 50px);
+    position: absolute;
+    animation: scrollin 3s infinite;
+}
+
+#arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: calc(98% - 20px);
+    left: calc(50% - 20px);
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgb(255, 255, 255);
+    animation: bounce 3s infinite;
+}
+
+#arrow-offset {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: calc(98% - 15px); /* Offset downwards */
+    left: calc(50% - 20px);
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgb(0, 0, 0);
+    animation: bounce 3s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+    
+}
+
+@keyframes scrollin {
+    0%{
+        top: -10%;
+    }
+    75%{
+        top: 50%;
+    }
+    80%{
+        top: 49%;
+    }
+    85%{
+        top: 50%;
+    }
+    90%{
+        top: 50%;
+    }
+    100%{
+        top: 50%;
+    }
+}
+.link{
+    /* text-decoration: none; */
+    color: rgb(0, 0, 0);
+    font-size: 4em;
+    font-family: "Arvo", serif;
+}
+.shadow{
+    box-shadow: 0px 0px 10px 5px black; 
+}
+#homebutton{
+    text-decoration: none;
+    background-color: tomato;
+    color: white;
+    position: absolute;
+    left: 95%;
+    top: 5%;
+}
+#linktext{
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+}
